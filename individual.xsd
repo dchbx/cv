@@ -1805,6 +1805,15 @@
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#termination_of_domestic_partnership"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#drop_self_due_to_new_eligibility"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#drop_family_member_due_to_new_eligibility"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#lost_hardship_exemption"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_immigration_status"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_income"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#court_order"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#employer_sponsored_coverage_termination"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_employment"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_eligibility_family"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_eligibility_member"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#relocate"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TaxFilerNameType">
