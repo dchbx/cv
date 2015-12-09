@@ -1658,11 +1658,6 @@
 			<xs:documentation>Life events that trigger special enrollment periods</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:anyURI">
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#open_enrollment">
-				<xs:annotation>
-					<xs:documentation>Placeholder for individual or employer open enrollment period</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#lost_access_to_mec">
 				<xs:annotation>
 					<xs:documentation>Loss of other health coverage</xs:documentation>
@@ -1671,11 +1666,6 @@
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#adoption">
 				<xs:annotation>
 					<xs:documentation>Adopting a child or placing a child for adoption</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#foster_care">
-				<xs:annotation>
-					<xs:documentation>Foster child added or removed</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#birth">
@@ -1688,16 +1678,17 @@
 					<xs:documentation>Marriage, entering a domestic partnerhip or adding a child due to marraige</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#domestic_partnership"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#divorce">
 				<xs:annotation>
 					<xs:documentation>Divorce or domestic partnerhip termination</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#location_change">
-				<xs:annotation>
-					<xs:documentation>Moving residence into HBX coverage area</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#death"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#child_age_off"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#relocate"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_eligibility_member"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_eligibility_family"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#termination_of_benefits">
 				<xs:annotation>
 					<xs:documentation>Dependent loss of ESI due to employee gaining Medicare or Employer failure to make timely COBRA premiums</xs:documentation>
@@ -1708,11 +1699,9 @@
 					<xs:documentation>Loss of employer-provided benefits due to separation of employment</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#citizen_status_change">
-				<xs:annotation>
-					<xs:documentation>Change to ACA-eligible immigration status</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_employment"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#employer_sponsored_coverage_termination"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#employee_gaining_medicare"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#enrollment_error_or_misconduct_hbx">
 				<xs:annotation>
 					<xs:documentation>Erroneous enrollment due to HBX/HHS error</xs:documentation>
@@ -1733,14 +1722,12 @@
 					<xs:documentation>QHP issuer violated its contract</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#court_order"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_income"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_immigration_status"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_medicaid_ineligible">
 				<xs:annotation>
 					<xs:documentation>Found ineligible for Medicaid after open enrollment ended</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_assistance">
-				<xs:annotation>
-					<xs:documentation>Change in circumstances that changes eligibility for assistance</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_employer_ineligible">
@@ -1748,6 +1735,7 @@
 					<xs:documentation>Consumer's employer applied for SHOP coverage but was found ineligible</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#lost_hardship_exemption"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#qualified_native_american">
 				<xs:annotation>
 					<xs:documentation>Consumer is native american</xs:documentation>
@@ -1773,47 +1761,12 @@
 					<xs:documentation>Exceptional circumstance due to being a victim of domestic abuse</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#exceptional_circumstances_hardship_exemption">
-				<xs:annotation>
-					<xs:documentation>Exceptional circumstance due to loss of eligibility for hardship exemption</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#exceptional_circumstances_civic_service">
 				<xs:annotation>
 					<xs:documentation>Exceptional circumstance for start or end of service with AmeriCorps State and National, VISTA, or NCCC service</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="urn:cms:terms:v1:qualifying_life_event#exceptional_circumstances"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#medical_coverage_order">
-				<xs:annotation>
-					<xs:documentation>Mandated medical coverage order</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#child_age_off"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#add_child_due_to_marriage"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#entering_domestic_partnership"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#employee_gaining_medicare"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#employer_cobra_non_payment"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#voluntary_dropping_cobra">
-				<xs:annotation>
-					<xs:documentation>Loss of other health coverage due to voluntary dropping of COBRA</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#release_from_incarceration"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#death"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#drop_person_due_to_divorce"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#termination_of_domestic_partnership"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#drop_self_due_to_new_eligibility"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#drop_family_member_due_to_new_eligibility"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#lost_hardship_exemption"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_immigration_status"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#eligibility_change_income"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#court_order"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#employer_sponsored_coverage_termination"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_employment"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_eligibility_family"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#new_eligibility_member"/>
-			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#relocate"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TaxFilerNameType">
