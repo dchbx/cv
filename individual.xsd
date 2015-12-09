@@ -1931,17 +1931,32 @@
 		</xs:annotation>
 	</xs:element>
 
+	<xs:complexType name="FamilyBrokerAccountType">
+		<xs:sequence>
+			<xs:element name="broker_npn" type="xs:string"/>
+			<xs:element name="start_on" type="SimpleDateType"/>
+			<xs:element name="end_on" type="SimpleDateType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FamilyBrokerAccountListType">
+		<xs:sequence>
+			<xs:element name="broker_account" type="FamilyBrokerAccountType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
 	<xs:group name="FamilySharedElementsGroup">
 		<xs:sequence>
 			<xs:element name="application_type" type="HbxServiceNameType" minOccurs="0"/>
 			<xs:element name="primary_family_member_id" type="IdentifierSimpleType"/>
 			<xs:element ref="renewal_consent_family_member_id" minOccurs="0"/>
 			<xs:element name="households" type="HouseholdsListType" minOccurs="0"/>
+			<xs:element name="broker_accounts" type="FamilyBrokerAccountListType" minOccurs="0"/>
 			<xs:element ref="irs_groups" minOccurs="0"/>
 			<xs:element ref="qualifying_life_events" minOccurs="0"/>
 			<xs:element ref="renewal_consent_through_year" minOccurs="0"/>
 			<xs:group ref="SubmittedCommentedActiveResourceGroup"/>
-                        <xs:group ref="ResourceTimestampGroup"/>
+			<xs:group ref="ResourceTimestampGroup"/>
 		</xs:sequence>
 	</xs:group>
 
@@ -1952,7 +1967,7 @@
 		<xs:sequence>
 			<xs:element name="id" type="IdentifierType"/>
 			<xs:element name="family_members" type="FamilyMembersListType"/>
-                        <xs:group ref="FamilySharedElementsGroup"/>
+			<xs:group ref="FamilySharedElementsGroup"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>
