@@ -603,7 +603,7 @@
 			<xs:element name="identifiers">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="identifier">
+						<xs:element name="identifier" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:complexContent>
 									<xs:restriction base="IdentifierSimpleType">
@@ -664,7 +664,31 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceApplicantType">
 		<xs:sequence>
-			<xs:element name="person" type="PersonType"/>
+			<xs:element name="individual">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="EligibilityDeterminationApplicantType">
+							<xs:sequence>
+								<xs:element name="id" type="IdentifierType" minOccurs="0"/>
+								<xs:element name="person" type="PersonLinkType"/>
+								<xs:element ref="person_relationships" minOccurs="0"/>
+								<xs:element name="person_demographics" type="PersonDemographicsType"/>
+								<xs:element name="is_primary_applicant" type="xs:boolean"/>
+								<xs:element name="is_consent_applicant" type="xs:boolean"/>
+								<xs:element name="is_coverage_applicant" type="xs:boolean">
+									<xs:annotation>
+										<xs:documentation>Individual is applying for health coverage</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="is_without_assistance" type="xs:boolean"/>
+								<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
+								<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+								<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
+							</xs:sequence>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="has_fixed_address" type="xs:boolean"/>
 			<xs:element name="is_living_in_state" type="xs:boolean"/>
 			<xs:element name="is_temp_out_of_state"/>
@@ -1242,7 +1266,11 @@
 			<xs:element name="employee_roles" type="EmployeeRolesListType" minOccurs="0"/>
 			<xs:element name="broker_roles" type="BrokerRolesListType" minOccurs="0"/>
 			<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="is_enrolled_in_employer_sponsored_coverage" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_enrolled_in_employer_sponsored_coverage" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:boolean"/>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
@@ -1453,14 +1481,15 @@
 		<xs:complexContent>
 			<xs:restriction base="IndividualType">
 				<xs:sequence>
+					<xs:element name="id" type="IdentifierType" minOccurs="0"/>
 					<xs:element name="person" type="PersonLinkType"/>
-					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_enrolled_in_employer_sponsored_coverage" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
-					<xs:element ref="financial_statements" minOccurs="0">
+					<xs:element ref="person_relationships"/>
+					<xs:element name="person_demographics" type="PersonDemographicsType"/>
+					<xs:element name="is_primary_applicant" type="xs:boolean"/>
+					<xs:element name="is_consent_applicant" type="xs:boolean"/>
+					<xs:element name="is_coverage_applicant" type="xs:boolean">
 						<xs:annotation>
-							<xs:documentation>Income, expenses and tax filing status for this Individual</xs:documentation>
+							<xs:documentation>Individual is applying for health coverage</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1506,11 +1535,21 @@
 		<xs:complexContent>
 			<xs:restriction base="IndividualType">
 				<xs:sequence>
+					<xs:element name="id" type="IdentifierType" minOccurs="0"/>
 					<xs:element name="person" type="PersonLinkType"/>
+					<xs:element ref="person_relationships" minOccurs="0"/>
+					<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
+					<xs:element name="is_primary_applicant" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_consent_applicant" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_coverage_applicant" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Individual is applying for health coverage</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_enrolled_in_employer_sponsored_coverage" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
 		</xs:complexContent>
