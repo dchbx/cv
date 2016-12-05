@@ -656,7 +656,7 @@
 			<xs:element name="financial_assistance_applicants">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="financial_assitance_applicant" type="FinancialAssistanceApplicantType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="financial_assistance_applicant" type="FinancialAssistanceApplicantType" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
