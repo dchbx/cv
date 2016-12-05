@@ -603,7 +603,21 @@
 			<xs:element name="identifiers">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="identifier" type="IdentifierSimpleType" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="identifier">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:restriction base="IdentifierSimpleType">
+										<xs:sequence>
+											<xs:element name="id" type="xs:anyURI">
+												<xs:annotation>
+													<xs:documentation>Dereferenceable ID for this resource</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+										</xs:sequence>
+									</xs:restriction>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -617,7 +631,24 @@
 			<xs:element name="renewal_base_year" type="xs:gYear" minOccurs="0"/>
 			<xs:element name="years_to_renew" type="xs:integer" minOccurs="0"/>
 			<xs:element name="us_state" type="UsStateNameType"/>
-			<xs:element ref="benchmark_plan"/>
+			<xs:element name="benchmark_plan">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="PlanLinkType">
+							<xs:sequence>
+								<xs:group ref="PlanCommonElementsGroup"/>
+								<xs:element name="metal_level" type="PlanMetalLevelNameType"/>
+								<xs:element name="coverage_type" type="QhpBenefitCoverageNameType"/>
+								<xs:element name="ehb_percent" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Essential Health Benefit factor</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="has_accepted_medicaid_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_attestation_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_submission_terms" type="xs:boolean"/>
@@ -625,7 +656,7 @@
 			<xs:element name="financial_assistance_applicants">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="financial_assitance_applicant" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="financial_assitance_applicant" type="FinancialAssistanceApplicantType" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -633,6 +664,18 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceApplicantType">
 		<xs:sequence>
+			<xs:element name="person">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:restriction base="PersonLinkType">
+							<xs:sequence>
+								<xs:element name="id" type="IdentifierType"/>
+								<xs:element name="person_name" type="PersonNameType"/>
+							</xs:sequence>
+						</xs:restriction>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
 			<xs:element name="has_fixed_address" type="xs:boolean"/>
 			<xs:element name="is_living_in_state" type="xs:boolean"/>
 			<xs:element name="is_temp_out_of_state"/>
@@ -660,20 +703,67 @@
 			<xs:element name="pregnancy_due_on" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="pregnancy_end_on" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="is_subject_to_five_year_bar" type="xs:boolean"/>
-			<xs:element name="is_five_year_bar_met" type="xs:boolean"/>
-			<xs:element name="is_forty_quarters" type="xs:boolean"/>
-			<xs:element name="non_ssn_apply_reason"/>
+			<xs:element name="is_five_year_bar_met" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_forty_quarters" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="non_ssn_apply_reason" minOccurs="0"/>
 			<xs:element name="incomes">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="income" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="income" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:restriction base="FinancialAssistanceIncomeType">
+										<xs:sequence>
+											<xs:element name="title" type="xs:string" minOccurs="0"/>
+											<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
+											<xs:element name="hours_per_week" type="xs:integer"/>
+											<xs:element name="amount" type="xs:integer"/>
+											<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+											<xs:element name="start_on" type="SimpleDateType"/>
+											<xs:element name="end_on" type="SimpleDateType"/>
+											<xs:element name="is_projected" type="xs:boolean"/>
+											<xs:element name="submitted_at" type="xs:dateTime"/>
+										</xs:sequence>
+									</xs:restriction>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="deductions">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="deduction" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="deduction" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:restriction base="FinancialAssistanceDeductionType">
+										<xs:sequence>
+											<xs:element name="title" type="xs:string" minOccurs="0"/>
+											<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
+											<xs:element name="amount" type="xs:integer"/>
+											<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+											<xs:element name="start_on" type="SimpleDateType"/>
+											<xs:element name="end_on" type="SimpleDateType"/>
+											<xs:element name="submitted_at" type="xs:dateTime"/>
+										</xs:sequence>
+									</xs:restriction>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="benefits">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="benefit" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:restriction base="FinancialAssistanceBenefitType"/>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -703,6 +793,7 @@
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="FinancialAssistanceBenefitType"/>
 	<xs:complexType name="FinancialStatementType">
 		<xs:sequence>
 			<xs:element name="tax_filing_status" type="TaxFilerNameType"/>
