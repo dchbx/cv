@@ -79,7 +79,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="financial_assistance_application"/>
+	<xs:element name="financial_assistance_application" type="FinancialAssistanceApplicationType"/>
 	<xs:element name="financial_statements">
 		<xs:annotation>
 			<xs:documentation>Financial information used to determine insurance assistance eligibility</xs:documentation>
@@ -664,18 +664,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceApplicantType">
 		<xs:sequence>
-			<xs:element name="person">
-				<xs:complexType>
-					<xs:complexContent>
-						<xs:restriction base="PersonLinkType">
-							<xs:sequence>
-								<xs:element name="id" type="IdentifierType"/>
-								<xs:element name="person_name" type="PersonNameType"/>
-							</xs:sequence>
-						</xs:restriction>
-					</xs:complexContent>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="person" type="PersonType"/>
 			<xs:element name="has_fixed_address" type="xs:boolean"/>
 			<xs:element name="is_living_in_state" type="xs:boolean"/>
 			<xs:element name="is_temp_out_of_state"/>
@@ -718,7 +707,7 @@
 											<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 											<xs:element name="hours_per_week" type="xs:integer"/>
 											<xs:element name="amount" type="xs:integer"/>
-											<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+											<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 											<xs:element name="start_on" type="SimpleDateType"/>
 											<xs:element name="end_on" type="SimpleDateType"/>
 											<xs:element name="is_projected" type="xs:boolean"/>
@@ -742,7 +731,7 @@
 											<xs:element name="title" type="xs:string" minOccurs="0"/>
 											<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 											<xs:element name="amount" type="xs:integer"/>
-											<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+											<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 											<xs:element name="start_on" type="SimpleDateType"/>
 											<xs:element name="end_on" type="SimpleDateType"/>
 											<xs:element name="submitted_at" type="xs:dateTime"/>
@@ -760,7 +749,20 @@
 						<xs:element name="benefit" minOccurs="0" maxOccurs="unbounded">
 							<xs:complexType>
 								<xs:complexContent>
-									<xs:restriction base="FinancialAssistanceBenefitType"/>
+									<xs:restriction base="FinancialAssistanceBenefitType">
+										<xs:sequence>
+											<xs:element name="title" type="xs:string" minOccurs="0"/>
+											<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
+											<xs:element name="is_employer_sponsored"/>
+											<xs:element name="is_eligible" type="xs:boolean"/>
+											<xs:element name="is_enrolled" type="xs:boolean" minOccurs="0"/>
+											<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
+											<xs:element name="employee_cost_frequency" minOccurs="0"/>
+											<xs:element name="start_on" type="SimpleDateType"/>
+											<xs:element name="end_on" type="SimpleDateType"/>
+											<xs:element name="submitted_at" type="xs:dateTime"/>
+										</xs:sequence>
+									</xs:restriction>
 								</xs:complexContent>
 							</xs:complexType>
 						</xs:element>
@@ -775,7 +777,7 @@
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 			<xs:element name="hours_per_week" type="xs:integer"/>
 			<xs:element name="amount" type="xs:integer"/>
-			<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+			<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 			<xs:element name="start_on" type="SimpleDateType"/>
 			<xs:element name="end_on" type="SimpleDateType"/>
 			<xs:element name="is_projected" type="xs:boolean"/>
@@ -787,13 +789,26 @@
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 			<xs:element name="amount" type="xs:integer"/>
-			<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+			<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 			<xs:element name="start_on" type="SimpleDateType"/>
 			<xs:element name="end_on" type="SimpleDateType"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="FinancialAssistanceBenefitType"/>
+	<xs:complexType name="FinancialAssistanceBenefitType">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string" minOccurs="0"/>
+			<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
+			<xs:element name="is_employer_sponsored"/>
+			<xs:element name="is_eligible" type="xs:boolean"/>
+			<xs:element name="is_enrolled" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
+			<xs:element name="employee_cost_frequency" minOccurs="0"/>
+			<xs:element name="start_on" type="SimpleDateType"/>
+			<xs:element name="end_on" type="SimpleDateType"/>
+			<xs:element name="submitted_at" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="FinancialStatementType">
 		<xs:sequence>
 			<xs:element name="tax_filing_status" type="TaxFilerNameType"/>
@@ -2240,7 +2255,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_motivation#placeholder"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="FinancialAssistanceIncomeFrequencyNameType">
+	<xs:simpleType name="FinancialAssistanceFrequencyNameType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#daily"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#weekly"/>
@@ -2292,6 +2307,25 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#moving_expenses"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#health_savings_account"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#reservists_performing_artists_and_fee_basis_government_official_expenses"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceBenefitNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#acf_refugee_medical_assistance"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#americorps_health_benefits"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#child_health_insurance_plan"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#medicaid"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#medicare"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#medicare_advantage"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#medicare_part_b"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#private_individual_and_family_coverage"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#state_supplementary_payment"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#tricare"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#veterans_benefits"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#naf_health_benefit_program"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#health_care_for_peace_corp_volunteers"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#state_supplementary_payment"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#department_of_defense_non_appropriated_health_benefits"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
