@@ -4,18 +4,6 @@
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="organization.xsd"/>
 	<xs:include schemaLocation="plan.xsd"/>
-			<xs:complexType name="AffectedMemberType">
-		<xs:sequence>
-			<xs:element name="member_before_changes" type="PersonType"/>
-		</xs:sequence>
-	</xs:complexType>
-<xs:element name="affected_members_deprecated">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="affected_member" type="ApplicantLinkType"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
 	<xs:element name="applicant_links">
 		<xs:annotation>
 			<xs:documentation>Set of Individual references</xs:documentation>
@@ -91,6 +79,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="financial_assistance_application"/>
 	<xs:element name="financial_statements">
 		<xs:annotation>
 			<xs:documentation>Financial information used to determine insurance assistance eligibility</xs:documentation>
@@ -218,6 +207,11 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:complexType name="AffectedMemberType">
+		<xs:sequence>
+			<xs:element name="member_before_changes" type="PersonType"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="AlternateBenefitType">
 		<xs:sequence>
 			<xs:element name="type" type="AlternateBenefitNameType"/>
@@ -602,6 +596,111 @@
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="broker_role" type="BrokerRoleType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialAssistanceApplicationType">
+		<xs:sequence>
+			<xs:element name="identifiers">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="identifier" type="IdentifierSimpleType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="applicant_type" type="FinancialAssistanceApplicationApplicantNameType"/>
+			<xs:element name="request_type" type="FinancialAssistanceApplicationRequestNameType"/>
+			<xs:element name="motivation_type" type="FinancialAssistanceApplicationMotivationNameType"/>
+			<xs:element name="is_joint_tax_filing" type="xs:boolean"/>
+			<xs:element name="submitted_at" type="xs:dateTime"/>
+			<xs:element name="assistance_year" type="xs:gYear"/>
+			<xs:element name="is_renewal_authorized" type="xs:boolean"/>
+			<xs:element name="renewal_base_year" type="xs:gYear" minOccurs="0"/>
+			<xs:element name="years_to_renew" type="xs:integer" minOccurs="0"/>
+			<xs:element name="us_state" type="UsStateNameType"/>
+			<xs:element ref="benchmark_plan"/>
+			<xs:element name="has_accepted_medicaid_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_attestation_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_submission_terms" type="xs:boolean"/>
+			<xs:element name="is_ridp_verified"/>
+			<xs:element name="financial_assistance_applicants">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="financial_assitance_applicant" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialAssistanceApplicantType">
+		<xs:sequence>
+			<xs:element name="has_fixed_address" type="xs:boolean"/>
+			<xs:element name="is_living_in_state" type="xs:boolean"/>
+			<xs:element name="is_temp_out_of_state"/>
+			<xs:element name="is_required_to_file_taxes" type="xs:boolean"/>
+			<xs:element name="tax_filer_type" type="TaxFilerNameType"/>
+			<xs:element name="is_medicare_eligible"/>
+			<xs:element name="is_student" type="xs:boolean"/>
+			<xs:element name="student_type" type="FinancialAssistanceApplicationStudentNameType" minOccurs="0"/>
+			<xs:element name="school_type" type="FinancialAssistanceApplicationSchoolNameType" minOccurs="0"/>
+			<xs:element name="student_status_end_on" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="is_ia_eligible" type="xs:boolean"/>
+			<xs:element name="is_medicaid_chip_eligible"/>
+			<xs:element name="is_self_attested_blind_or_disabled" type="xs:boolean"/>
+			<xs:element name="is_self_attested_long_term_care" type="xs:boolean"/>
+			<xs:element name="is_veteran" type="xs:boolean"/>
+			<xs:element name="is_refugee" type="xs:boolean"/>
+			<xs:element name="is_trafficking_victim" type="xs:boolean"/>
+			<xs:element name="is_former_foster_care" type="xs:boolean"/>
+			<xs:element name="age_left_foster_care" type="xs:integer" minOccurs="0"/>
+			<xs:element name="foster_care_us_state" type="UsStateNameType" minOccurs="0"/>
+			<xs:element name="had_medicaid_during_foster_care" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_pregnant" type="xs:boolean"/>
+			<xs:element name="is_post_partum_period" type="xs:boolean"/>
+			<xs:element name="children_expected_count" type="xs:integer" minOccurs="0"/>
+			<xs:element name="pregnancy_due_on" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="pregnancy_end_on" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="is_subject_to_five_year_bar" type="xs:boolean"/>
+			<xs:element name="is_five_year_bar_met" type="xs:boolean"/>
+			<xs:element name="is_forty_quarters" type="xs:boolean"/>
+			<xs:element name="non_ssn_apply_reason"/>
+			<xs:element name="incomes">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="income" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="deductions">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="deduction" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialAssistanceIncomeType">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string" minOccurs="0"/>
+			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
+			<xs:element name="hours_per_week" type="xs:integer"/>
+			<xs:element name="amount" type="xs:integer"/>
+			<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+			<xs:element name="start_on" type="SimpleDateType"/>
+			<xs:element name="end_on" type="SimpleDateType"/>
+			<xs:element name="is_projected" type="xs:boolean"/>
+			<xs:element name="submitted_at" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FinancialAssistanceDeductionType">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string" minOccurs="0"/>
+			<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
+			<xs:element name="amount" type="xs:integer"/>
+			<xs:element name="frequency" type="FinancialAssistanceIncomeFrequencyNameType"/>
+			<xs:element name="start_on" type="SimpleDateType"/>
+			<xs:element name="end_on" type="SimpleDateType"/>
+			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="FinancialStatementType">
@@ -1503,9 +1602,9 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#moving_expenses"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#health_savings_account"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#reservists_performing_artists_and_fee_basis_government_official_expenses"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#tuition_and_fees"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#ira_deduction"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#student_loan_interest_deduction"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#tuition_and_fees"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#ira_deduction"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#student_loan_interest_deduction"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IndividualEventNameType">
@@ -1548,16 +1647,16 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:income#rental_and_royalty"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#scholorship_payments"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#social_security_benefit"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:income#social_security_disability_income"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:income#social_security_retirement"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income#social_security_disability_income"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income#social_security_retirement"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#supplemental_security_income"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#tax_exempt_interest"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#unemployment_insurance"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#wages_and_salaries"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#income_from_irs"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:income#title_monthly"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:income#title_yearly"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:income#strike_benefits"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income#title_monthly"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income#title_yearly"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income#strike_benefits"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IndividualRequestNameType">
@@ -1839,7 +1938,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:tax_filer#joint"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:tax_filer#separate"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:tax_filer#dependent"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:tax_filer#non-filer"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:tax_filer#non_filer"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TaxHouseholdEventNameType">
@@ -2020,4 +2119,88 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="family" type="FamilyType"/>
+	<xs:simpleType name="FinancialAssistanceApplicationStudentNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:student#placeholder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceApplicationSchoolNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#placeholder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceApplicationApplicantNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_applicant#placeholder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceApplicationSourceNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_source#placeholder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceApplicationRequestNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_request#placeholder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceApplicationMotivationNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_motivation#placeholder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceIncomeFrequencyNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#daily"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#weekly"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#biweekly"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#monthly"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#quarterly"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#half_yearly"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_frequency#yearly"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceIncomeNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#alimony_and_maintenance"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#american_indian_and_alaskan_native"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#capital_gains"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#dividend"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#employer_funded_disability"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#estate_trust"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#farming_and_fishing"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#foreign"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#interest"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#lump_sum_amount"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#military"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#net_self_employment"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#other"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#pension_retirement_benefits"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#permanent_workers_compensation"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#prizes_and_awards"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#rental_and_royalty"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#scholorship_payments"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#social_security_benefit"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#supplemental_security_income"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#tax_exempt_interest"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#unemployment_insurance"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#wages_and_salaries"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income#income_from_irs"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceDeductionNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#alimony_paid"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#deductable_part_of_self_employment_taxes"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#domestic_production_activities"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#penalty_on_early_withdrawel_of_savings"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#educator_expenses"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#rent_or_royalties"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#self_employment_sep_simple_and_qualified_plans"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#self_employed_health_insurance"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#moving_expenses"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#health_savings_account"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_deduction#reservists_performing_artists_and_fee_basis_government_official_expenses"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>
