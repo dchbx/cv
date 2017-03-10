@@ -625,6 +625,7 @@
 			<xs:element name="request_type" type="FinancialAssistanceApplicationRequestNameType"/>
 			<xs:element name="motivation_type" type="FinancialAssistanceApplicationMotivationNameType"/>
 			<xs:element name="is_joint_tax_filing" type="xs:boolean"/>
+			<xs:element name="status" type="FinancialAssistanceApplicationStatusNameType"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 			<xs:element name="assistance_year" type="xs:gYear"/>
 			<xs:element name="is_renewal_authorized" type="xs:boolean"/>
@@ -694,6 +695,10 @@
 			<xs:element name="is_temp_out_of_state"/>
 			<xs:element name="is_required_to_file_taxes" type="xs:boolean"/>
 			<xs:element name="tax_filer_type" type="TaxFilerNameType"/>
+			<xs:element name="is_claimed_as_tax_dependent" type="xs:boolean"/>
+			<xs:element name="has_insurance" type="xs:boolean"/>
+			<xs:element name="had_prior_insurance" type="xs:boolean"/>
+			<xs:element name="has_state_health_benefit" type="xs:boolean"/>
 			<xs:element name="is_medicare_eligible"/>
 			<xs:element name="is_student" type="xs:boolean"/>
 			<xs:element name="student_type" type="FinancialAssistanceApplicationStudentNameType" minOccurs="0"/>
@@ -718,7 +723,8 @@
 			<xs:element name="is_subject_to_five_year_bar" type="xs:boolean"/>
 			<xs:element name="is_five_year_bar_met" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_forty_quarters" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="non_ssn_apply_reason" minOccurs="0"/>
+			<xs:element name="is_ssn_applied" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="non_ssn_apply_reason" type="xs:string" minOccurs="0"/>
 			<xs:element name="incomes">
 				<xs:complexType>
 					<xs:sequence>
@@ -727,13 +733,18 @@
 								<xs:complexContent>
 									<xs:restriction base="FinancialAssistanceIncomeType">
 										<xs:sequence>
+											<xs:element name="income_id" type="xs:integer"/>
 											<xs:element name="title" type="xs:string" minOccurs="0"/>
 											<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
+											<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
 											<xs:element name="hours_per_week" type="xs:integer"/>
 											<xs:element name="amount" type="xs:integer"/>
 											<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 											<xs:element name="start_on" type="SimpleDateType"/>
 											<xs:element name="end_on" type="SimpleDateType"/>
+											<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
+											<xs:element name="employer_id" type="xs:integer"/>
+											<xs:element name="address" type="AddressType"/>
 											<xs:element name="is_projected" type="xs:boolean"/>
 											<xs:element name="submitted_at" type="xs:dateTime"/>
 										</xs:sequence>
@@ -752,6 +763,7 @@
 								<xs:complexContent>
 									<xs:restriction base="FinancialAssistanceDeductionType">
 										<xs:sequence>
+											<!-- <xs:element name="deduction_id" type="xs:integer"/> -->
 											<xs:element name="title" type="xs:string" minOccurs="0"/>
 											<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 											<xs:element name="amount" type="xs:integer"/>
@@ -775,6 +787,7 @@
 								<xs:complexContent>
 									<xs:restriction base="FinancialAssistanceBenefitType">
 										<xs:sequence>
+											<xs:element name="benefit_id" type="xs:integer"/>
 											<xs:element name="title" type="xs:string" minOccurs="0"/>
 											<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
 											<xs:element name="is_employer_sponsored"/>
@@ -799,11 +812,15 @@
 		<xs:sequence>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
+			<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
 			<xs:element name="hours_per_week" type="xs:integer"/>
 			<xs:element name="amount" type="xs:integer"/>
 			<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 			<xs:element name="start_on" type="SimpleDateType"/>
 			<xs:element name="end_on" type="SimpleDateType"/>
+			<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
+			<xs:element name="employer_id" type="xs:integer"/>
+			<xs:element name="address" type="AddressType"/>
 			<xs:element name="is_projected" type="xs:boolean"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
@@ -1356,6 +1373,7 @@
 					<xs:documentation>Individual's immigration status</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="immigration_date" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="is_state_resident" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Person is resident of HBX state</xs:documentation>
@@ -2292,6 +2310,12 @@
 	<xs:simpleType name="FinancialAssistanceApplicationMotivationNameType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_motivation#placeholder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialAssistanceApplicationStatusNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_status#submitted"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_application_status#verifying_income"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="FinancialAssistanceFrequencyNameType">
