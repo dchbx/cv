@@ -784,7 +784,7 @@
 								<xs:complexContent>
 									<xs:restriction base="FinancialAssistanceDeductionType">
 										<xs:sequence>
-											<!-- <xs:element name="deduction_id" type="xs:integer"/> -->
+											<xs:element name="deduction_id" type="xs:integer"/>
 											<xs:element name="title" type="xs:string" minOccurs="0"/>
 											<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 											<xs:element name="amount" type="xs:integer"/>
@@ -811,7 +811,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceIncomeType">
 		<xs:sequence>
-                        <xs:element name="income_id" type="xs:integer" minOccurs="0"/> 
+			<xs:element name="income_id" type="xs:integer" minOccurs="0"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 			<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
@@ -829,6 +829,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceDeductionType">
 		<xs:sequence>
+			<xs:element name="deduction_id" type="xs:integer" minOccurs="0"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 			<xs:element name="amount" type="xs:integer"/>
@@ -840,7 +841,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceBenefitType">
 		<xs:sequence>
-		        <xs:element name="benefit_id" type="xs:integer" minOccurs="0"/>
+			<xs:element name="benefit_id" type="xs:integer" minOccurs="0"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
 			<xs:element name="is_employer_sponsored"/>
