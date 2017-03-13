@@ -1286,11 +1286,7 @@
 			<xs:element name="employee_roles" type="EmployeeRolesListType" minOccurs="0"/>
 			<xs:element name="broker_roles" type="BrokerRolesListType" minOccurs="0"/>
 			<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="is_enrolled_in_employer_sponsored_coverage" minOccurs="0">
-				<xs:simpleType>
-					<xs:restriction base="xs:boolean"/>
-				</xs:simpleType>
-			</xs:element>
+			<xs:element name="is_enrolled_in_employer_sponsored_coverage" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>

@@ -47,6 +47,7 @@
 					<xs:element ref="person_relationships" minOccurs="0"/>
 					<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_consent_applicant" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_coverage_applicant" type="xs:boolean" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Individual is applying for health coverage</xs:documentation>
