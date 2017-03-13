@@ -663,33 +663,77 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+
+	<xs:complexType name="FinancialAssistanceIncomeEntryType">
+		<xs:complexContent>
+			<xs:restriction base="FinancialAssistanceIncomeType">
+				<xs:sequence>
+					<xs:element name="income_id" type="xs:integer"/>
+					<xs:element name="title" type="xs:string" minOccurs="0"/>
+					<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
+					<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
+					<xs:element name="hours_per_week" type="xs:integer"/>
+					<xs:element name="amount" type="xs:integer"/>
+					<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
+					<xs:element name="start_on" type="SimpleDateType"/>
+					<xs:element name="end_on" type="SimpleDateType"/>
+					<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
+					<xs:element name="employer_id" type="xs:integer"/>
+					<xs:element name="address" type="AddressType"/>
+					<xs:element name="is_projected" type="xs:boolean"/>
+					<xs:element name="submitted_at" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="FinancialAssistanceApplicantIndivdualType">
+		<xs:complexContent>
+			<xs:restriction base="EligibilityDeterminationApplicantType">
+				<xs:sequence>
+					<xs:element name="id" type="IdentifierType" minOccurs="0"/>
+					<xs:element name="person" type="PersonLinkType"/>
+					<xs:element ref="person_relationships" minOccurs="0"/>
+					<xs:element name="person_demographics" type="PersonDemographicsType"/>
+					<xs:element name="is_primary_applicant" type="xs:boolean"/>
+					<xs:element name="is_consent_applicant" type="xs:boolean"/>
+					<xs:element name="is_coverage_applicant" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>Individual is applying for health coverage</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="is_without_assistance" type="xs:boolean"/>
+					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="FinancialAssistanceApplicantBenefitType">
+		<xs:complexContent>
+			<xs:restriction base="FinancialAssistanceBenefitType">
+				<xs:sequence>
+					<xs:element name="benefit_id" type="xs:integer"/>
+					<xs:element name="title" type="xs:string" minOccurs="0"/>
+					<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
+					<xs:element name="is_employer_sponsored"/>
+					<xs:element name="is_eligible" type="xs:boolean"/>
+					<xs:element name="is_enrolled" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="employee_cost_frequency" minOccurs="0"/>
+					<xs:element name="start_on" type="SimpleDateType"/>
+					<xs:element name="end_on" type="SimpleDateType"/>
+					<xs:element name="submitted_at" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<xs:complexType name="FinancialAssistanceApplicantType">
 		<xs:sequence>
-			<xs:element name="individual">
-				<xs:complexType>
-					<xs:complexContent>
-						<xs:restriction base="EligibilityDeterminationApplicantType">
-							<xs:sequence>
-								<xs:element name="id" type="IdentifierType" minOccurs="0"/>
-								<xs:element name="person" type="PersonLinkType"/>
-								<xs:element ref="person_relationships" minOccurs="0"/>
-								<xs:element name="person_demographics" type="PersonDemographicsType"/>
-								<xs:element name="is_primary_applicant" type="xs:boolean"/>
-								<xs:element name="is_consent_applicant" type="xs:boolean"/>
-								<xs:element name="is_coverage_applicant" type="xs:boolean">
-									<xs:annotation>
-										<xs:documentation>Individual is applying for health coverage</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-								<xs:element name="is_without_assistance" type="xs:boolean"/>
-								<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
-								<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
-								<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
-							</xs:sequence>
-						</xs:restriction>
-					</xs:complexContent>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="individual" type="FinancialAssistanceApplicantIndivdualType"/>
 			<xs:element name="has_fixed_address" type="xs:boolean"/>
 			<xs:element name="is_living_in_state" type="xs:boolean"/>
 			<xs:element name="is_temp_out_of_state"/>
@@ -728,30 +772,7 @@
 			<xs:element name="incomes">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="income" minOccurs="0" maxOccurs="unbounded">
-							<xs:complexType>
-								<xs:complexContent>
-									<xs:restriction base="FinancialAssistanceIncomeType">
-										<xs:sequence>
-											<xs:element name="income_id" type="xs:integer"/>
-											<xs:element name="title" type="xs:string" minOccurs="0"/>
-											<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
-											<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
-											<xs:element name="hours_per_week" type="xs:integer"/>
-											<xs:element name="amount" type="xs:integer"/>
-											<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
-											<xs:element name="start_on" type="SimpleDateType"/>
-											<xs:element name="end_on" type="SimpleDateType"/>
-											<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
-											<xs:element name="employer_id" type="xs:integer"/>
-											<xs:element name="address" type="AddressType"/>
-											<xs:element name="is_projected" type="xs:boolean"/>
-											<xs:element name="submitted_at" type="xs:dateTime"/>
-										</xs:sequence>
-									</xs:restriction>
-								</xs:complexContent>
-							</xs:complexType>
-						</xs:element>
+						<xs:element name="income" minOccurs="0" maxOccurs="unbounded" type="FinancialAssistanceIncomeEntryType"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -782,27 +803,7 @@
 			<xs:element name="benefits">
 				<xs:complexType>
 					<xs:sequence>
-						<xs:element name="benefit" minOccurs="0" maxOccurs="unbounded">
-							<xs:complexType>
-								<xs:complexContent>
-									<xs:restriction base="FinancialAssistanceBenefitType">
-										<xs:sequence>
-											<xs:element name="benefit_id" type="xs:integer"/>
-											<xs:element name="title" type="xs:string" minOccurs="0"/>
-											<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
-											<xs:element name="is_employer_sponsored"/>
-											<xs:element name="is_eligible" type="xs:boolean"/>
-											<xs:element name="is_enrolled" type="xs:boolean" minOccurs="0"/>
-											<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
-											<xs:element name="employee_cost_frequency" minOccurs="0"/>
-											<xs:element name="start_on" type="SimpleDateType"/>
-											<xs:element name="end_on" type="SimpleDateType"/>
-											<xs:element name="submitted_at" type="xs:dateTime"/>
-										</xs:sequence>
-									</xs:restriction>
-								</xs:complexContent>
-							</xs:complexType>
-						</xs:element>
+						<xs:element name="benefit" minOccurs="0" maxOccurs="unbounded" type="FinancialAssistanceApplicantBenefitType"/>
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
@@ -810,6 +811,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceIncomeType">
 		<xs:sequence>
+                        <xs:element name="income_id" type="xs:integer" minOccurs="0"/> 
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 			<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
@@ -838,6 +840,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceBenefitType">
 		<xs:sequence>
+		        <xs:element name="benefit_id" type="xs:integer" minOccurs="0"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
 			<xs:element name="is_employer_sponsored"/>
