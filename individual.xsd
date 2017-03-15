@@ -692,7 +692,7 @@
 			<xs:restriction base="EligibilityDeterminationApplicantType">
 				<xs:sequence>
 					<xs:element name="id" type="IdentifierType" minOccurs="0"/>
-					<xs:element name="person" type="PersonLinkType"/>
+					<xs:element name="person" type="PersonType"/>
 					<xs:element ref="person_relationships" minOccurs="0"/>
 					<xs:element name="person_demographics" type="PersonDemographicsType"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean"/>
@@ -1554,7 +1554,7 @@
 			<xs:restriction base="IndividualType">
 				<xs:sequence>
 					<xs:element name="id" type="IdentifierType" minOccurs="0"/>
-					<xs:element name="person" type="PersonLinkType"/>
+					<xs:element name="person" type="PersonType"/>
 					<xs:element ref="person_relationships" minOccurs="0"/>
 					<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean" minOccurs="0"/>
