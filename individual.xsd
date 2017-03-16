@@ -627,6 +627,7 @@
 			<xs:element name="is_joint_tax_filing" type="xs:boolean"/>
 			<xs:element name="status" type="FinancialAssistanceApplicationStatusNameType"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
+			<xs:element name="effective_date" type="xs:dateTime"/>
 			<xs:element name="assistance_year" type="xs:gYear"/>
 			<xs:element name="is_renewal_authorized" type="xs:boolean"/>
 			<xs:element name="renewal_base_year" type="xs:gYear" minOccurs="0"/>
@@ -671,6 +672,7 @@
 					<xs:element name="income_id" type="xs:integer"/>
 					<xs:element name="title" type="xs:string" minOccurs="0"/>
 					<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
+					<xs:element name="has_property_usage_rights" type="xs:boolean"/>
 					<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
 					<xs:element name="hours_per_week" type="xs:integer"/>
 					<xs:element name="amount" type="xs:integer"/>
@@ -679,7 +681,7 @@
 					<xs:element name="end_on" type="SimpleDateType"/>
 					<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
 					<xs:element name="employer_id" type="xs:integer"/>
-					<xs:element name="address" type="AddressType"/>
+					<xs:element name="employer_address" type="AddressType"/>
 					<xs:element name="is_projected" type="xs:boolean"/>
 					<xs:element name="submitted_at" type="xs:dateTime"/>
 				</xs:sequence>
@@ -695,6 +697,7 @@
 					<xs:element name="person" type="PersonType"/>
 					<xs:element ref="person_relationships" minOccurs="0"/>
 					<xs:element name="person_demographics" type="PersonDemographicsType"/>
+					<xs:element name="contact_method" type="xs:string" minOccurs="0"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean"/>
 					<xs:element name="is_consent_applicant" type="xs:boolean"/>
 					<xs:element name="is_coverage_applicant" type="xs:boolean">
@@ -760,6 +763,7 @@
 			<xs:element name="foster_care_us_state" type="UsStateNameType" minOccurs="0"/>
 			<xs:element name="had_medicaid_during_foster_care" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_pregnant" type="xs:boolean"/>
+			<xs:element name="is_enrolled_on_medicaid" type="xs:boolean"/>
 			<xs:element name="is_post_partum_period" type="xs:boolean"/>
 			<xs:element name="children_expected_count" type="xs:integer" minOccurs="0"/>
 			<xs:element name="pregnancy_due_on" type="SimpleDateType" minOccurs="0"/>
@@ -769,6 +773,10 @@
 			<xs:element name="is_forty_quarters" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_ssn_applied" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="non_ssn_apply_reason" type="xs:string" minOccurs="0"/>
+			<xs:element name="has_daily_living_help" type="xs:boolean"/>
+			<xs:element name="has_bill_pay_3_month_help" type="xs:boolean"/>
+			<xs:element name="is_resident_post_092296" type="xs:boolean"/>
+			<xs:element name="is_vet_spouse_or_child" type="xs:boolean"/>
 			<xs:element name="incomes">
 				<xs:complexType>
 					<xs:sequence>
@@ -814,6 +822,7 @@
 			<xs:element name="income_id" type="xs:integer" minOccurs="0"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
+			<xs:element name="has_property_usage_rights" type="xs:boolean"/>
 			<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
 			<xs:element name="hours_per_week" type="xs:integer"/>
 			<xs:element name="amount" type="xs:integer"/>
@@ -822,7 +831,7 @@
 			<xs:element name="end_on" type="SimpleDateType"/>
 			<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
 			<xs:element name="employer_id" type="xs:integer"/>
-			<xs:element name="address" type="AddressType"/>
+			<xs:element name="employer_address" type="AddressType"/>
 			<xs:element name="is_projected" type="xs:boolean"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
@@ -1277,6 +1286,7 @@
 			<xs:element name="person" type="PersonType"/>
 			<xs:element ref="person_relationships" minOccurs="0"/>
 			<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
+			<xs:element name="contact_method" type="xs:string" minOccurs="0"/>
 			<xs:element name="is_primary_applicant" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_consent_applicant" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_coverage_applicant" type="xs:boolean" minOccurs="0">
@@ -1557,6 +1567,7 @@
 					<xs:element name="person" type="PersonType"/>
 					<xs:element ref="person_relationships" minOccurs="0"/>
 					<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
+					<xs:element name="contact_method" type="xs:string" minOccurs="0"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_consent_applicant" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_coverage_applicant" type="xs:boolean" minOccurs="0">
@@ -2052,7 +2063,7 @@
 					<xs:documentation>Exceptional circumstance for start or end of service with AmeriCorps State and National, VISTA, or NCCC service</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<xs:enumeration value="urn:cms:terms:v1:qualifying_life_event#exceptional_circumstances"/>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#exceptional_circumstances"/>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#medical_coverage_order">
 				<xs:annotation>
 					<xs:documentation>Mandated medical coverage order</xs:documentation>
