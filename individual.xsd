@@ -776,7 +776,7 @@
 			<xs:element name="has_daily_living_help" type="xs:boolean"/>
 			<xs:element name="has_bill_pay_3_month_help" type="xs:boolean"/>
 			<xs:element name="is_resident_post_092296" type="xs:boolean"/>
-			<xs:element name="is_vet_spouse_or_child" type="xs:boolean"/>
+			<xs:element name="is_vets_spouse_or_child" type="xs:boolean"/>
 			<xs:element name="incomes">
 				<xs:complexType>
 					<xs:sequence>
