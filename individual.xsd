@@ -673,7 +673,7 @@
 					<xs:element name="title" type="xs:string" minOccurs="0"/>
 					<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 					<xs:element name="has_property_usage_rights" type="xs:boolean"/>
-					<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
+					<xs:element name="wage_type" type="WageTypeKinds" minOccurs="0"/>
 					<xs:element name="hours_per_week" type="xs:integer"/>
 					<xs:element name="amount" type="xs:integer"/>
 					<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
@@ -697,7 +697,7 @@
 					<xs:element name="person" type="PersonType"/>
 					<xs:element ref="person_relationships" minOccurs="0"/>
 					<xs:element name="person_demographics" type="PersonDemographicsType"/>
-					<xs:element name="contact_method" type="xs:string" minOccurs="0"/>
+					<xs:element name="preferred_contact_method" type="PreferredContactMethodType" minOccurs="0"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean"/>
 					<xs:element name="is_consent_applicant" type="xs:boolean"/>
 					<xs:element name="is_coverage_applicant" type="xs:boolean">
@@ -823,7 +823,7 @@
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 			<xs:element name="has_property_usage_rights" type="xs:boolean"/>
-			<xs:element name="wage_type" type="xs:string" minOccurs="0"/>
+			<xs:element name="wage_type" type="WageTypeKinds" minOccurs="0"/>
 			<xs:element name="hours_per_week" type="xs:integer"/>
 			<xs:element name="amount" type="xs:integer"/>
 			<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
@@ -1286,7 +1286,7 @@
 			<xs:element name="person" type="PersonType"/>
 			<xs:element ref="person_relationships" minOccurs="0"/>
 			<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
-			<xs:element name="contact_method" type="xs:string" minOccurs="0"/>
+			<xs:element name="preferred_contact_method" type="PreferredContactMethodType" minOccurs="0"/>
 			<xs:element name="is_primary_applicant" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_consent_applicant" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_coverage_applicant" type="xs:boolean" minOccurs="0">
@@ -1567,7 +1567,7 @@
 					<xs:element name="person" type="PersonType"/>
 					<xs:element ref="person_relationships" minOccurs="0"/>
 					<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
-					<xs:element name="contact_method" type="xs:string" minOccurs="0"/>
+					<xs:element name="preferred_contact_method" type="PreferredContactMethodType" minOccurs="0"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_consent_applicant" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_coverage_applicant" type="xs:boolean" minOccurs="0">
@@ -1881,6 +1881,13 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:marital_status#unknown"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="PreferredContactMethodType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:preferred_contact_method#phone"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:preferred_contact_method#email"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:preferred_contact_method#post"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="MinimumEssentialCoverageNameType">
 		<xs:annotation>
 			<xs:documentation>Source of coverage</xs:documentation>
@@ -2165,6 +2172,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:citizen_status#indian_tribe_member"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:citizen_status#not_lawfully_present_in_us"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:citizen_status#undocumented_immigrant"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:citizen_status#us_national"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="CoverageHouseholdMembersListType">
@@ -2296,12 +2304,42 @@
 	<xs:element name="family" type="FamilyType"/>
 	<xs:simpleType name="FinancialAssistanceApplicationStudentNameType">
 		<xs:restriction base="xs:anyURI">
-			<xs:enumeration value="urn:openhbx:terms:v1:student#placeholder"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#dropped_out"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#elementary"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#english_linguist"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#full_time"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#ged"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#graduated"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#graduate_school"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#half_time"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#junior_school"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#not_in_school"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#open_university"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#part_time"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#preschool"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#primary"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#secondary"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#technical"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#undergraduate"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#vocational"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student#vocational_tech"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="FinancialAssistanceApplicationSchoolNameType">
 		<xs:restriction base="xs:anyURI">
-			<xs:enumeration value="urn:openhbx:terms:v1:student_school#placeholder"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#english_language_institute"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#elementary"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#equivalent_vocational_tech"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#graduate_school"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#ged"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#high_school"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#junior_school"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#open_university"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#pre_school"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#primary"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#technical"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#undergraduate"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:student_school#vocational"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="FinancialAssistanceApplicationApplicantNameType">
@@ -2401,6 +2439,21 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#health_care_for_peace_corp_volunteers"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#state_supplementary_payment"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#department_of_defense_non_appropriated_health_benefits"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#private_individual_and_family_coverage"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#employer_sponsored_insurance"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#self_funded_student_health_coverage"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#foreign_government_health_coverage"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#private_health_insurance_plan"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#coverage_obtained_through_another_exchange"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#coverage_under_the_state_health_benefits_risk_pool"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#veterans_administration_health_benefits"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#peace_corps_health_benefits"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WageTypeKinds">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_wage_type#1099"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_wage_type#w2"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
