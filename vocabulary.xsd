@@ -8,4 +8,5 @@
   <xsd:include schemaLocation="policy.xsd"/>
   <xsd:include schemaLocation="document_storage.xsd"/>
   <xsd:include schemaLocation="verification_services.xsd"/>
+  <xsd:include schemaLocation="financial_assistance.xsd"/>
 </xsd:schema>
