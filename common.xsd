@@ -2007,4 +2007,24 @@
 			<xs:element name="office_location" type="OfficeLocationType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+
+	<xs:complexType name="IncomeVerificationType">
+		<xs:sequence>
+			<xs:element name="is_valid" type="xs:boolean"/>
+			<xs:element name="verification_source" type="xs:string" minOccurs="0"/>
+			<xs:element name="verified_at" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VerifiedCurrencyAmountPerAnnumType">
+		<xs:annotation>
+			<xs:documentation>Sum of currency amount for a calendar year, includes income verification data if available.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="calendar_year" type="CalendarYearType"/>
+			<xs:element name="total_amount" type="CurrencyType"/>
+			<xs:element name="verification" type="IncomeVerificationType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+
 </xs:schema>

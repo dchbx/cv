@@ -79,7 +79,7 @@
 		<xs:sequence>
 			<xs:element name="id" type="IdentifierType"/>
 			<xs:element name="eligibility_determination_applicants" type="AssistanceEligibilityDeterminationApplicantListType"/>
-			<xs:element name="total_incomes_by_year" type="AssistedTotalIncomesByYearType"/>
+			<xs:element name="total_incomes_by_year" type="AssistedTaxHouseholdIncomesByYearType"/>
 			<xs:element name="household_state" type="HouseholdStatusNameType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Eligibility system workflow status</xs:documentation>
@@ -142,6 +142,7 @@
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
+                  			<xs:element name="total_incomes_by_year" type="AssistedIndividualTotalIncomesByYearType"/>
 				</xs:sequence>
 			</xs:restriction>
 		</xs:complexContent>
@@ -153,7 +154,7 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="AssistedTotalIncomesByYearType">
+	<xs:complexType name="AssistedTaxHouseholdIncomesByYearType">
 		<xs:annotation>
 	            <xs:documentation>Sum of all qualified household income sources, including incomes of person who pays taxes, spouse and dependents, less qualified deductions, by calendar year. Also includes information about verification of the income.</xs:documentation>
 		</xs:annotation>
@@ -162,22 +163,4 @@
 		</xs:sequence>
 	</xs:complexType>
 
-	<xs:complexType name="VerifiedCurrencyAmountPerAnnumType">
-		<xs:annotation>
-			<xs:documentation>Sum of currency amount for a calendar year, includes income verification data if available.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="calendar_year" type="CalendarYearType"/>
-			<xs:element name="total_amount" type="CurrencyType"/>
-			<xs:element name="verification" type="AssistanceTaxHouseholdFinancialVerificationType" minOccurs="0" maxOccurs="1"/>
-		</xs:sequence>
-	</xs:complexType>
-
-	<xs:complexType name="AssistanceTaxHouseholdFinancialVerificationType">
-		<xs:sequence>
-			<xs:element name="is_valid" type="xs:boolean"/>
-			<xs:element name="verification_source" type="xs:string" minOccurs="0"/>
-			<xs:element name="verified_at" type="xs:dateTime"/>
-		</xs:sequence>
-	</xs:complexType>
 </xs:schema>
