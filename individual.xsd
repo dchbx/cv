@@ -4,6 +4,20 @@
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="organization.xsd"/>
 	<xs:include schemaLocation="plan.xsd"/>
+
+	<xs:complexType name="AffectedMemberType">
+		<xs:sequence>
+			<xs:element name="member_before_changes" type="PersonType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="affected_members_deprecated">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="affected_member" type="ApplicantLinkType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
 	<xs:element name="applicant_links">
 		<xs:annotation>
 			<xs:documentation>Set of Individual references</xs:documentation>
@@ -206,11 +220,6 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:complexType name="AffectedMemberType">
-		<xs:sequence>
-			<xs:element name="member_before_changes" type="PersonType"/>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="AlternateBenefitType">
 		<xs:sequence>
 			<xs:element name="type" type="AlternateBenefitNameType"/>
@@ -1296,6 +1305,7 @@
 			<xs:element name="birth_date" type="SimpleDateType"/>
 			<xs:element name="death_date" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="is_incarcerated" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_handicapped" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="language_code" type="LanguageNameType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Preferred language</xs:documentation>
@@ -1714,6 +1724,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#tuition_and_fees"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#ira_deduction"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#student_loan_interest_deduction"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#retro_deduction"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IndividualEventNameType">
@@ -1766,6 +1777,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:income#title_monthly"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#title_yearly"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#strike_benefits"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:income#retro_income"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IndividualRequestNameType">

@@ -231,6 +231,8 @@
 			<xs:element name="transaction_id" type="IdentifierSimpleType"/>
 			<xs:element name="type" type="EnrollmentEventNameType"/>
 			<xs:element name="market" type="AcaMarketPlaceNameType"/>
+			<xs:element name="premium_effective_date" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="assistance_election_date" type="SimpleDateType" minOccurs="0"/>
 			<xs:element ref="policy" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -569,12 +571,31 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#initial"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#auto_renew"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#active_renew"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#active_renew_member_add">
+				<xs:annotation>
+					<xs:documentation>
+                                        	Renewal of a policy with the addition of new members.
+						The affected members list will contain only those being added,
+						even though all members present in the policy are being renewed.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#audit"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_identifier"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_address"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_communication_numbers"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_handicap_status"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_financial_assistance"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_product"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_product_member_add">
+				<xs:annotation>
+					<xs:documentation>
+                                        	Change of a policy product while also adding members.
+						The affected members list will contain only those being added,
+						even though all members policy are present on the new policy.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_reenroll"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#reinstate_enrollment"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#reinstate_member"/>

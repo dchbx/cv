@@ -275,21 +275,23 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:employee_census_relationship#spouse"/>
 		</xs:restriction>
 	</xs:simpleType>
+
+	<xs:simpleType name="ContributionPercentType">
+		<xs:restriction base="xs:decimal">
+			<xs:maxInclusive value="100"/>
+			<xs:minInclusive value="0"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+
 	<xs:complexType name="RelationshipBenefitType">
 		<xs:sequence>
 			<xs:element name="relationship" type="RelationshipBenefitRelationshipType"/>
 			<xs:element name="offered" type="xs:boolean"/>
-			<xs:element name="contribution_percent">
-				<xs:simpleType>
-					<xs:restriction base="xs:decimal">
-						<xs:maxInclusive value="100"/>
-						<xs:minInclusive value="0"/>
-						<xs:fractionDigits value="2"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
+			<xs:element name="contribution_percent" type="ContributionPercentType"/>
 		</xs:sequence>
 	</xs:complexType>
+
 	<xs:complexType name="RelationshipBenefitsListType">
 		<xs:sequence>
 			<xs:element name="relationship_benefit" type="RelationshipBenefitType" minOccurs="0" maxOccurs="unbounded"/>
@@ -302,6 +304,8 @@
 		<xs:sequence>
 			<xs:element name="id" type="IdentifierType" minOccurs="0"/>
 			<xs:element name="name" type="xs:string"/>
+			<xs:element name="group_size" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="enrollment_factor" type="EnrollmentFactorType" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="reference_plan" type="PlanLinkType" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="elected_plans">
 				<xs:complexType>
@@ -313,6 +317,7 @@
 			<xs:choice>
 				<xs:element name="federal_contributions" type="xs:anyType"/>
 				<xs:element name="relationship_benefits" type="RelationshipBenefitsListType"/>
+				<xs:element name="composite_rating_tiers" type="CompositeRatingTierListType"/>
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
@@ -1079,4 +1084,25 @@
 
 	<xs:element name="employer_request" type="EmployerRequestType"/>
 	<xs:element name="employer_response" type="EmployerResponseType"/>
+
+	<xs:complexType name="CompositeRatingTierType">
+		<xs:sequence>
+			<xs:element name="tier_name" type="xs:string"/>
+			<xs:element name="premium" type="CurrencyType"/>
+			<xs:element name="contribution_percent" type="ContributionPercentType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="EnrollmentFactorType">
+		<xs:restriction base="xs:decimal">
+			<xs:maxInclusive value="1.0"/>
+			<xs:minInclusive value="0.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="CompositeRatingTierListType">
+		<xs:sequence>
+			<xs:element name="composite_rating_tier" type="CompositeRatingTierType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>
