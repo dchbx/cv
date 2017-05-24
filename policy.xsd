@@ -480,6 +480,7 @@
 									<xs:sequence>
 										<xs:element name="employer_link" type="EmployerLinkType"/>
 										<xs:element name="total_employer_responsible_amount" type="CurrencyType"/>
+						                                <xs:element name="composite_rating_tier_name" type="CompositeRatingTierNameType" minOccurs="0"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -497,6 +498,7 @@
 						</xs:choice>
 						<xs:element name="premium_total_amount" type="CurrencyType"/>
 						<xs:element name="total_responsible_amount" type="CurrencyType"/>
+						<xs:element name="rating_area" type="xs:string" minOccurs="0"/>
 						<xs:element name="eligibility_event" type="EligibilityType" minOccurs="0"/>
 					</xs:sequence>
 				</xs:complexType>
