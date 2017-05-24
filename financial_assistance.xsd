@@ -3,12 +3,18 @@
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="links.xsd"/>
 	<xs:include schemaLocation="individual.xsd"/>
+	<xs:include schemaLocation="verification_services.xsd"/>
 
 	<xs:element name="financial_assistance_application" type="FinancialAssistanceApplicationType"/>
 
 	<xs:complexType name="FinancialAssistanceApplicantType">
 		<xs:sequence>
 			<xs:element name="individual" type="FinancialAssistanceApplicantIndivdualType"/>
+                        <xs:element name="immigration_information" type="ImmigrationInformationType" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Individual's immigration information and documentation</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
 			<xs:element name="has_fixed_address" type="xs:boolean"/>
 			<xs:element name="is_living_in_state" type="xs:boolean"/>
 			<xs:element name="is_temp_out_of_state"/>

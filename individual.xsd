@@ -1246,6 +1246,11 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="immigration_date" type="SimpleDateType" minOccurs="0"/>
+                        <xs:element name="immigration_status" type="ImmigrationStatusNameType" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Individual's immigration status</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
 			<xs:element name="is_state_resident" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Person is resident of HBX state</xs:documentation>
@@ -2330,4 +2335,22 @@
 		</xs:sequence>
 	</xs:complexType>
 
+       <xs:simpleType name="ImmigrationStatusNameType">
+                <xs:annotation>
+                        <xs:documentation>Enumerated list of immigration status modes</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:anyURI">
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#asylee"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#refugee"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#cuban_haitian"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#amerasian_non_citizen_under_584_of_foaa"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#deportation_withheld_under_243h_or_241b_of_ina"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#special_iraqi_afghani_immigrant"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#victim_of_severe_trafficking"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#member_of_federally_recognized_indian_tribe_or_american_indian_born_in_canada"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#parolled"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#conditional_entry_granted_before_1980"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#battered_non_citizen_spouse_child_etc"/>
+                </xs:restriction>
+        </xs:simpleType>
 </xs:schema>
