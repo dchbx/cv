@@ -103,6 +103,8 @@
 					<xs:documentation>HBX-assigned identifier for this application.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="haven_app_id" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="e_case_id" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="applicant_type" type="FinancialAssistanceApplicationApplicantNameType"/>
 			<xs:element name="request_type" type="FinancialAssistanceApplicationRequestNameType"/>
 			<xs:element name="motivation_type" type="FinancialAssistanceApplicationMotivationNameType"/>
@@ -134,8 +136,11 @@
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="has_accepted_medicaid_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_medicaid_insurance_collection_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_attestation_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_submission_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_parent_living_out_of_home_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_report_change_terms" type="xs:boolean"/>
 			<xs:element name="assistance_tax_households" type="AssistanceTaxHouseholdsListType"/>
 		</xs:sequence>
 	</xs:complexType>
