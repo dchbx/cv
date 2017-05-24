@@ -3,9 +3,7 @@
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="links.xsd"/>
 	<xs:include schemaLocation="individual.xsd"/>
-
 	<xs:element name="financial_assistance_application" type="FinancialAssistanceApplicationType"/>
-
 	<xs:complexType name="FinancialAssistanceApplicationType">
 		<xs:sequence>
 			<xs:element name="id" type="IdentifierType">
@@ -13,6 +11,9 @@
 					<xs:documentation>HBX-assigned identifier for this application.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="fin_app_id" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="haven_app_id" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="e_case_id" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="applicant_type" type="FinancialAssistanceApplicationApplicantNameType"/>
 			<xs:element name="request_type" type="FinancialAssistanceApplicationRequestNameType"/>
 			<xs:element name="motivation_type" type="FinancialAssistanceApplicationMotivationNameType"/>
@@ -44,18 +45,19 @@
 				</xs:complexType>
 			</xs:element>
 			<xs:element name="has_accepted_medicaid_terms" type="xs:boolean"/>
-			<xs:element name="has_accepted_attestation_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_medicaid_insurance_collection_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_parent_living_out_of_home_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_report_change_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_submission_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_attestation_terms" type="xs:boolean"/>
 			<xs:element name="assistance_tax_households" type="AssistanceTaxHouseholdsListType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="AssistanceTaxHouseholdsListType">
 		<xs:sequence>
-			<xs:element name="assistance_tax_household" type="AssistanceTaxHouseholdType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="assistance_tax_household" type="AssistanceTaxHouseholdType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="AssistanceTaxHouseholdType">
 		<xs:sequence>
 			<xs:element name="id" type="IdentifierType">
@@ -68,13 +70,11 @@
 			<xs:element name="eligibility_determinations" type="AssistanceEligibilityDeterminationListType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="AssistanceEligibilityDeterminationListType">
 		<xs:sequence>
-			<xs:element name="eligibility_determination" type="AssistanceEligibilityDeterminationType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="eligibility_determination" type="AssistanceEligibilityDeterminationType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="AssistanceEligibilityDeterminationType">
 		<xs:sequence>
 			<xs:element name="id" type="IdentifierType"/>
@@ -115,13 +115,11 @@
 			<xs:group ref="OptionalResourceTimestampGroup"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="AssistanceEligibilityDeterminationApplicantListType">
 		<xs:sequence>
-			<xs:element name="eligibility_determination_applicant" type="AssistanceEligibilityDeterminationApplicantType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="eligibility_determination_applicant" type="AssistanceEligibilityDeterminationApplicantType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="AssistanceEligibilityDeterminationApplicantType">
 		<xs:complexContent>
 			<xs:restriction base="IndividualType">
@@ -142,25 +140,22 @@
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
-                  			<xs:element name="total_incomes_by_year" type="AssistedIndividualTotalIncomesByYearType"/>
+					<xs:element name="total_incomes_by_year" type="AssistedIndividualTotalIncomesByYearType"/>
 				</xs:sequence>
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="AssistanceTaxHouseholdMemberListType">
 		<xs:sequence>
 			<xs:element name="assistance_tax_household_member" type="FinancialAssistanceApplicantType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="AssistedTaxHouseholdIncomesByYearType">
 		<xs:annotation>
-	            <xs:documentation>Sum of all qualified household income sources, including incomes of person who pays taxes, spouse and dependents, less qualified deductions, by calendar year. Also includes information about verification of the income.</xs:documentation>
+			<xs:documentation>Sum of all qualified household income sources, including incomes of person who pays taxes, spouse and dependents, less qualified deductions, by calendar year. Also includes information about verification of the income.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-		<xs:element name="total_income_by_year" type="VerifiedCurrencyAmountPerAnnumType" maxOccurs="unbounded"/>
+			<xs:element name="total_income_by_year" type="VerifiedCurrencyAmountPerAnnumType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 </xs:schema>
