@@ -1251,6 +1251,7 @@
                                         <xs:documentation>Individual's immigration status</xs:documentation>
                                 </xs:annotation>
                         </xs:element>
+			<xs:element name="tribal_info" type="TribalInfoType" minOccurs="0"/>
 			<xs:element name="is_state_resident" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Person is resident of HBX state</xs:documentation>
@@ -2353,4 +2354,12 @@
                         <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#battered_non_citizen_spouse_child_etc"/>
                 </xs:restriction>
         </xs:simpleType>
+
+        <xs:complexType name="TribalInfoType">
+                <xs:sequence>
+                        <xs:element name="tribal_id" type="xs:string" minOccurs="0"/>
+                        <xs:element name="tribal_name" type="xs:string" minOccurs="0"/>
+                        <xs:element name="tribal_state" type="xs:string" minOccurs="0"/>
+                </xs:sequence>
+        </xs:complexType>
 </xs:schema>
