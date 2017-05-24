@@ -207,6 +207,11 @@
 			<xs:element name="location_country_code" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="address_full_text" type="xs:string" minOccurs="0"/>
 			<xs:element name="location" type="LocationNameType" minOccurs="0"/>
+			<xs:element name="is_preferred" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating this is contact number of choice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ApprovalType">
@@ -299,6 +304,11 @@
 				</xs:simpleType>
 			</xs:element>
 			<xs:element name="email_address" type="nonEmptyString"/>
+			<xs:element name="is_preferred" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating this is contact number of choice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="IdentifierBaseType" abstract="true">
