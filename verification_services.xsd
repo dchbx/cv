@@ -462,6 +462,8 @@
 	<xs:complexType name="VerificationSet">
 		<xs:sequence>
 			<xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType" minOccurs="0"/>
+			<xs:element name="residency_verification_results" type="residencyVerificationResultCodeType" minOccurs="0"/>
 			<xs:element name="income_verification_result" type="IncomeVerificationResultType" minOccurs="0"/>
 			<xs:element name="mec_verification_result" type="MECVerificationResultType" minOccurs="0"/>
 		</xs:sequence>
