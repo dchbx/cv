@@ -557,6 +557,10 @@
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType"/>
+			<xs:element name="magi_medicaid_monthly_allowable_limit_income" type="CurrencyType"/>
+			<xs:element name="csr_household_income" type="CurrencyType"/>
+			<xs:element name="csr_allowable_limit_income" type="CurrencyType"/>
 			<xs:element name="benchmark_plan_id" type="IdentifierSimpleType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Silver plan used to calculate assistance values</xs:documentation>
@@ -650,6 +654,7 @@
 					<xs:element name="is_without_assistance" type="xs:boolean"/>
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
@@ -1159,6 +1164,7 @@
 			<xs:element name="is_enrolled_in_employer_sponsored_coverage" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 			<xs:element name="brokers" type="BrokerAccountListType" minOccurs="0"/>
 			<xs:element ref="responsible_parties" minOccurs="0"/>
@@ -1446,6 +1452,7 @@
 					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
@@ -1756,6 +1763,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:preferred_contact_method#phone"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:preferred_contact_method#email"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:preferred_contact_method#post"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:preferred_contact_method#email_and_post"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="MinimumEssentialCoverageNameType">
@@ -2152,6 +2160,7 @@
 			<xs:element ref="renewal_consent_family_member_id" minOccurs="0"/>
 			<xs:element name="e_case_id" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="fin_app_id" type="xs:anyURI" minOccurs="0"/>
+			<xs:element name="haven_app_id" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="households" type="HouseholdsListType" minOccurs="0"/>
 			<xs:element name="broker_accounts" type="FamilyBrokerAccountListType" minOccurs="0"/>
 			<xs:element ref="irs_groups" minOccurs="0"/>

@@ -30,7 +30,8 @@
 			<xs:element name="school_type" type="FinancialAssistanceApplicationSchoolNameType" minOccurs="0"/>
 			<xs:element name="student_status_end_on" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="is_ia_eligible" type="xs:boolean"/>
-			<xs:element name="is_medicaid_chip_eligible"/>
+			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean"/>
+			<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_self_attested_blind_or_disabled" type="xs:boolean"/>
 			<xs:element name="is_self_attested_long_term_care" type="xs:boolean"/>
 			<xs:element name="is_veteran" type="xs:boolean"/>
@@ -141,6 +142,7 @@
 			<xs:element name="has_accepted_submission_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_parent_living_out_of_home_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_report_change_terms" type="xs:boolean"/>
+			<xs:element name="request_full_determination" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="assistance_tax_households" type="AssistanceTaxHouseholdsListType"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -236,8 +238,9 @@
 					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean"/>
+					<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
-                  			<xs:element name="total_incomes_by_year" type="AssistedIndividualTotalIncomesByYearType"/>
+					<xs:element name="total_incomes_by_year" type="AssistedIndividualTotalIncomesByYearType"/>
 				</xs:sequence>
 			</xs:restriction>
 		</xs:complexContent>
