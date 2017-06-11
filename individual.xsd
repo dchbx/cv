@@ -650,7 +650,8 @@
 					<xs:element name="is_without_assistance" type="xs:boolean"/>
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
@@ -1158,7 +1159,8 @@
 			<xs:element name="is_enrolled_in_employer_sponsored_coverage" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 			<xs:element name="brokers" type="BrokerAccountListType" minOccurs="0"/>
 			<xs:element ref="responsible_parties" minOccurs="0"/>
@@ -1446,10 +1448,11 @@
 							<xs:documentation>Individual is applying for health coverage</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
-					<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_without_assistance" type="xs:boolean"/>
+					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean"/>
+					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean"/>
+					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean"/>
+					<xs:element name="is_totally_ineligible" type="xs:boolean"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
