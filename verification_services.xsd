@@ -4,31 +4,27 @@
 	<xs:include schemaLocation="links.xsd"/>
 	<xs:include schemaLocation="plan.xsd"/>
 	<xs:include schemaLocation="individual.xsd"/>
-
 	<xs:simpleType name="residencyVerificationResultCodeType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:address_verification#ADDRESS_NOT_IN_AREA"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:address_verification#ADDRESS_IN_AREA"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:complexType name="verificationQuestionResponseOptionType">
 		<xs:sequence>
 			<xs:element name="response_id" type="nonEmptyString">
 				<xs:annotation>
 					<xs:documentation>ID of the response from RIDP - if this does not exist, use the question number.</xs:documentation>
-			    </xs:annotation>
+				</xs:annotation>
 			</xs:element>
-                   <xs:element name="response_text" type="xs:string"/>
+			<xs:element name="response_text" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="verificationQuestionResponseOptionListType">
 		<xs:sequence>
-	          <xs:element name="response_option" type="verificationQuestionResponseOptionType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="response_option" type="verificationQuestionResponseOptionType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="verificationQuestionPromptType">
 		<xs:sequence>
 			<xs:element name="question_id" type="xs:string"/>
@@ -36,22 +32,19 @@
 			<xs:element name="response_options" type="verificationQuestionResponseOptionListType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="verificationQuestionResponseType">
 		<xs:sequence>
 			<xs:element name="question_id" type="xs:string"/>
-			<xs:element name="answer" type="verificationQuestionResponseOptionType" minOccurs="1"/>
-         	</xs:sequence>
+			<xs:element name="answer" type="verificationQuestionResponseOptionType"/>
+		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="verificationQuestionResponseSubmissionType">
 		<xs:sequence>
 			<xs:element name="session_id" type="xs:string"/>
 			<xs:element name="transaction_id" type="xs:string"/>
-			<xs:element name="question_response" type="verificationQuestionResponseType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="question_response" type="verificationQuestionResponseType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:simpleType name="interactiveVerificationResponseCodeType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:interactive_identity_verification#FAILURE"/>
@@ -59,36 +52,31 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:interactive_identity_verification#MORE_INFORMATION_REQUIRED"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:simpleType name="interactiveVerificationCompleteResponseCodeType">
 		<xs:restriction base="interactiveVerificationResponseCodeType">
 			<xs:enumeration value="urn:openhbx:terms:v1:interactive_identity_verification#FAILURE"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:interactive_identity_verification#SUCCESS"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:simpleType name="interactiveVerificationSessionResponseCodeType">
 		<xs:restriction base="interactiveVerificationResponseCodeType">
 			<xs:enumeration value="urn:openhbx:terms:v1:interactive_identity_verification#MORE_INFORMATION_REQUIRED"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:complexType name="interactiveVerificationOverrideRequestType">
 		<xs:sequence>
-		   <xs:element name="transaction_id" type="xs:string"/>
+			<xs:element name="transaction_id" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="interactiveVerificationResponseType">
 		<xs:sequence>
 			<xs:element name="response_code" type="interactiveVerificationResponseCodeType"/>
 			<xs:element name="response_text" type="xs:string" minOccurs="0"/>
 			<xs:element name="transaction_id" type="xs:string"/>
 			<xs:element name="session_id" type="xs:string" minOccurs="0"/>
-		        <xs:element name="question" type="verificationQuestionPromptType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="question" type="verificationQuestionPromptType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="interactiveVerificationCompletedResponseType">
 		<xs:complexContent>
 			<xs:restriction base="interactiveVerificationResponseType">
@@ -100,7 +88,6 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="verificationSessionResponseRequiredResponseType">
 		<xs:complexContent>
 			<xs:restriction base="interactiveVerificationResponseType">
@@ -108,12 +95,11 @@
 					<xs:element name="response_code" type="interactiveVerificationSessionResponseCodeType"/>
 					<xs:element name="transaction_id" type="xs:string"/>
 					<xs:element name="session_id" type="xs:string"/>
-					<xs:element name="question" type="verificationQuestionPromptType" minOccurs="1" maxOccurs="unbounded"/>
+					<xs:element name="question" type="verificationQuestionPromptType" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="verificationIndividualType">
 		<xs:complexContent>
 			<xs:restriction base="IndividualType">
@@ -125,38 +111,29 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="interactiveVerificationSessionStartRequestBodyType">
 		<xs:sequence>
 			<xs:element name="individual" type="verificationIndividualType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="interactiveVerificationResultBodyType">
 		<xs:choice>
 			<xs:element name="verification_result" type="interactiveVerificationCompletedResponseType"/>
 			<xs:element name="session" type="verificationSessionResponseRequiredResponseType"/>
 		</xs:choice>
 	</xs:complexType>
-
-        <xs:element name="interactive_verification_override_request" type="interactiveVerificationOverrideRequestType"/>
-        <xs:element name="interactive_verification_override_result" type="interactiveVerificationCompletedResponseType"/>
-
+	<xs:element name="interactive_verification_override_request" type="interactiveVerificationOverrideRequestType"/>
+	<xs:element name="interactive_verification_override_result" type="interactiveVerificationCompletedResponseType"/>
 	<xs:element name="interactive_verification_start" type="interactiveVerificationSessionStartRequestBodyType"/>
-
 	<xs:element name="interactive_verification_question_response" type="verificationQuestionResponseSubmissionType"/>
 	<xs:element name="interactive_verification_result" type="interactiveVerificationResultBodyType"/>
-
 	<xs:element name="residency_verification_response" type="residencyVerificationResultCodeType"/>
-
 	<xs:complexType name="residencyVerificationRequestBodyType">
 		<xs:sequence>
 			<xs:element name="individual" type="verificationIndividualType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:element name="residency_verification_request" type="residencyVerificationRequestBodyType"/>
-
 	<xs:complexType name="residencyVerificationRequestType">
 		<xs:complexContent>
 			<xs:restriction base="ServiceRequestType">
@@ -179,7 +156,6 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="residencyVerificationResponseType">
 		<xs:complexContent>
 			<xs:restriction base="ServiceResponseType">
@@ -221,7 +197,6 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="PassportInformationType">
 		<xs:sequence>
 			<xs:element name="issuing_country" type="xs:string"/>
@@ -229,36 +204,33 @@
 			<xs:element name="expiration_date" type="SimpleDateType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="ReceiptDocumentType">
 		<xs:sequence>
 			<xs:element name="receipt_number" type="xs:string"/>
 			<xs:element name="expiration_date" type="SimpleDateType"/>
 		</xs:sequence>
 	</xs:complexType>
-
-        <xs:complexType name="DocumentResultType">
+	<xs:complexType name="DocumentResultType">
 		<xs:sequence>
 			<xs:element name="case_number" type="xs:string"/>
 			<xs:element name="response_code" type="xs:string"/>
 			<xs:element name="response_description_text" type="xs:string"/>
 			<xs:element name="tds_response_description_text" type="xs:string" minOccurs="0"/>
-			<xs:element name="entry_date" minOccurs="0" type="SimpleDateType"/>
-			<xs:element name="admitted_to_date" minOccurs="0" type="SimpleDateType"/>
-			<xs:element name="admitted_to_text" minOccurs="0" type="xs:string"/>
-			<xs:element name="country_birth_code" minOccurs="0" type="xs:string"/>
-			<xs:element name="country_citizen_code" minOccurs="0" type="xs:string"/>
-			<xs:element name="coa_code" minOccurs="0" type="xs:string"/>
-			<xs:element name="eads_expire_date" minOccurs="0" type="SimpleDateType"/>
+			<xs:element name="entry_date" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="admitted_to_date" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="admitted_to_text" type="xs:string" minOccurs="0"/>
+			<xs:element name="country_birth_code" type="xs:string" minOccurs="0"/>
+			<xs:element name="country_citizen_code" type="xs:string" minOccurs="0"/>
+			<xs:element name="coa_code" type="xs:string" minOccurs="0"/>
+			<xs:element name="eads_expire_date" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="elig_statement_code" type="xs:string"/>
 			<xs:element name="elig_statement_txt" type="xs:string"/>
-			<xs:element name="iav_type_code" minOccurs="0" type="xs:string"/>
-			<xs:element name="iav_type_text" minOccurs="0" type="xs:string"/>
-			<xs:element name="grant_date" minOccurs="0" type="SimpleDateType"/>
-			<xs:element name="grant_date_reason_code" minOccurs="0" type="xs:string"/>
+			<xs:element name="iav_type_code" type="xs:string" minOccurs="0"/>
+			<xs:element name="iav_type_text" type="xs:string" minOccurs="0"/>
+			<xs:element name="grant_date" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="grant_date_reason_code" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="LawfulPresenceDocumentResultsType">
 		<xs:sequence>
 			<xs:element name="document_I327" type="DocumentResultType" minOccurs="0"/>
@@ -278,7 +250,6 @@
 			<xs:element name="document_other_case_2" type="DocumentResultType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="ImmigrationDocumentsType">
 		<xs:sequence>
 			<xs:element name="has_document_I327" type="xs:boolean"/>
@@ -298,7 +269,6 @@
 			<xs:element name="other_case_2_document_description" type="xs:string" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="ImmigrationInformationType">
 		<xs:sequence>
 			<xs:element name="also_known_as" type="xs:string" minOccurs="0"/>
@@ -311,7 +281,6 @@
 			<xs:element name="documents" type="ImmigrationDocumentsType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="LawfulPresenceRequestType">
 		<xs:sequence>
 			<xs:element name="individual" type="verificationIndividualType"/>
@@ -320,7 +289,6 @@
 			<xs:element name="requested_coverage_start_date" type="SimpleDateType"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:simpleType name="LawfulPresencePresenceCodeType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:presence_status#lawful_permanent_resident"/>
@@ -337,7 +305,6 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:presence_status#other"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:simpleType name="LawfulPresenceEmploymentAuthorizedCodeType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:employment_authorization#authorized"/>
@@ -346,21 +313,18 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:employment_authorization#cnmi_authorized_only"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:simpleType name="LawfulPresenceResponseDeterminedCodeType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:determination#lawfully_present"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:determination#not_lawfully_present"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:simpleType name="LawfulPresenceResponseIndeterminateCodeType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:determination#invalid_information"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:lawful_presence:determination#additional_verification_required"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:complexType name="LawfulPresenceResponseType">
 		<xs:sequence>
 			<xs:element name="case_number" type="xs:string"/>
@@ -369,7 +333,7 @@
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="response_code" type="LawfulPresenceResponseIndeterminateCodeType"/>
-			                                <xs:element name="response_text" type="xs:string" minOccurs="0"/>
+							<xs:element name="response_text" type="xs:string" minOccurs="0"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -377,7 +341,7 @@
 					<xs:complexType>
 						<xs:sequence>
 							<xs:element name="response_code" type="LawfulPresenceResponseDeterminedCodeType"/>
-			                                <xs:element name="response_text" type="xs:string" minOccurs="0"/>
+							<xs:element name="response_text" type="xs:string" minOccurs="0"/>
 							<xs:element name="legal_status" type="LawfulPresencePresenceCodeType"/>
 							<xs:element name="employment_authorized" type="LawfulPresenceEmploymentAuthorizedCodeType"/>
 							<xs:element name="document_results" type="LawfulPresenceDocumentResultsType"/>
@@ -387,7 +351,6 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:simpleType name="DeathConfirmationCodeType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:death_confirmation#confirmed"/>
@@ -395,12 +358,11 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:death_confirmation#confirmed"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:complexType name="SSAVerificationResultType">
 		<xs:sequence>
 			<xs:element name="individual" type="verificationIndividualType"/>
-		        <xs:element name="response_code" type="xs:string"/>
-		        <xs:element name="response_text" type="xs:string" minOccurs="0"/>
+			<xs:element name="response_code" type="xs:string"/>
+			<xs:element name="response_text" type="xs:string" minOccurs="0"/>
 			<xs:choice>
 				<xs:sequence>
 					<xs:element name="ssn_verification_failed" fixed="true"/>
@@ -419,46 +381,93 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:element name="ssa_verification_request" type="verificationIndividualType">
 		<xs:annotation>
 			<xs:documentation>Root element for validation requests to the SSA service.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-
 	<xs:element name="ssa_verification_result" type="SSAVerificationResultType">
 		<xs:annotation>
 			<xs:documentation>Root element for response from SSA service.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-
 	<xs:element name="lawful_presence_request" type="LawfulPresenceRequestType">
 		<xs:annotation>
 			<xs:documentation>Root element for lawful presence request.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-
 	<xs:element name="lawful_presence" type="LawfulPresenceResponseType">
 		<xs:annotation>
 			<xs:documentation>This element is the response body provided to a request for lawful presence information.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-
-        <xs:complexType name="ExternalLawfulPresenceResultType">
-           <xs:sequence>
-              <xs:element name="is_lawfully_present" type="xs:boolean"/>
-              <xs:element name="citizen_status" type="UsCitizenStatusNameType"/>
-           </xs:sequence>
-        </xs:complexType>
-
-	<xs:complexType name="VerificationSet">
+	<xs:complexType name="ExternalLawfulPresenceResultType">
 		<xs:sequence>
-                   <xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
-                   <xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType"/>
-                   <xs:element name="residency_verification_results" type="residencyVerificationResultCodeType"/>
+			<xs:element name="is_lawfully_present" type="xs:boolean"/>
+			<xs:element name="citizen_status" type="UsCitizenStatusNameType"/>
 		</xs:sequence>
 	</xs:complexType>
-
+	<xs:simpleType name="IncomeVerificationCodeType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#pending"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#outstanding"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#verified"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#cleared"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="IncomeVerificationResultType">
+		<xs:annotation>
+			<xs:documentation>Root element for Eligibility Determination Income Verification response.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="individual" type="verificationIndividualType"/>
+			<xs:element name="response_code" type="xs:string"/>
+			<xs:element name="response_text" type="IncomeVerificationCodeType" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="income_verification_failed" fixed="true"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="income_verified" fixed="true"/>
+				</xs:sequence>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="MECVerificationCodeType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#pending"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#outstanding"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#verified"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#cleared"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="MECVerificationResultType">
+		<xs:annotation>
+			<xs:documentation>Root element for Eligibility Determination MEC Verification response.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="individual" type="verificationIndividualType"/>
+			<xs:element name="response_code" type="xs:string"/>
+			<xs:element name="response_text" type="MECVerificationCodeType" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="mec_verification_failed" fixed="true"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="mec_verified" fixed="true"/>
+				</xs:sequence>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VerificationSet">
+		<xs:sequence>
+			<xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType" minOccurs="0"/>
+			<xs:element name="residency_verification_results" type="residencyVerificationResultCodeType" minOccurs="0"/>
+			<xs:element name="income_verification_result" type="IncomeVerificationResultType" minOccurs="0"/>
+			<xs:element name="mec_verification_result" type="MECVerificationResultType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="VerifiedFamilyMemberType">
 		<xs:annotation>
 			<xs:documentation>Family member with verification results.</xs:documentation>
@@ -508,23 +517,20 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="VerifiedFamilyMembersListType">
 		<xs:sequence>
-			<xs:element name="family_member" type="VerifiedFamilyMemberType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="family_member" type="VerifiedFamilyMemberType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="VerifiedFamilyType">
 		<xs:annotation>
-			<xs:documentation>Describes a family unit.</xs:documentation>                               
-		</xs:annotation>                    
-		<xs:sequence>                                                                                       
-			<xs:element name="id" type="IdentifierType"/>               
+			<xs:documentation>Describes a family unit.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="IdentifierType"/>
 			<xs:element name="family_members" type="VerifiedFamilyMembersListType"/>
 			<xs:group ref="FamilySharedElementsGroup"/>
 		</xs:sequence>
 	</xs:complexType>
-
-        <xs:element name="external_verified_family" type="VerifiedFamilyType"/>
+	<xs:element name="external_verified_family" type="VerifiedFamilyType"/>
 </xs:schema>

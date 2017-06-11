@@ -4,7 +4,6 @@
 	<xs:include schemaLocation="common.xsd"/>
 	<xs:include schemaLocation="organization.xsd"/>
 	<xs:include schemaLocation="plan.xsd"/>
-
 	<xs:complexType name="AffectedMemberType">
 		<xs:sequence>
 			<xs:element name="member_before_changes" type="PersonType"/>
@@ -17,7 +16,6 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-
 	<xs:element name="applicant_links">
 		<xs:annotation>
 			<xs:documentation>Set of Individual references</xs:documentation>
@@ -610,7 +608,6 @@
 			<xs:element name="broker_role" type="BrokerRoleType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
 	<xs:complexType name="FinancialAssistanceIncomeEntryType">
 		<xs:complexContent>
 			<xs:restriction base="FinancialAssistanceIncomeType">
@@ -634,7 +631,6 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="FinancialAssistanceApplicantIndivdualType">
 		<xs:complexContent>
 			<xs:restriction base="EligibilityDeterminationApplicantType">
@@ -651,6 +647,7 @@
 							<xs:documentation>Individual is applying for health coverage</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_without_assistance" type="xs:boolean"/>
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
@@ -660,7 +657,6 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="FinancialAssistanceApplicantBenefitType">
 		<xs:complexContent>
 			<xs:restriction base="FinancialAssistanceBenefitType">
@@ -680,7 +676,6 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
-
 	<xs:complexType name="FinancialAssistanceIncomeType">
 		<xs:sequence>
 			<xs:element name="income_id" type="xs:integer" minOccurs="0"/>
@@ -1160,6 +1155,7 @@
 			</xs:element>
 			<xs:element name="employee_roles" type="EmployeeRolesListType" minOccurs="0"/>
 			<xs:element name="broker_roles" type="BrokerRolesListType" minOccurs="0"/>
+			<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_enrolled_in_employer_sponsored_coverage" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
@@ -1174,9 +1170,8 @@
 					<xs:documentation>Income, expenses and tax filing status for this Individual</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-
 			<xs:element name="verifications" type="xs:anyType" minOccurs="0"/>
-                        <xs:element name="total_incomes_by_year" type="AssistedIndividualTotalIncomesByYearType" minOccurs="0"/>
+			<xs:element name="total_incomes_by_year" type="AssistedIndividualTotalIncomesByYearType" minOccurs="0"/>
 			<xs:group ref="CommentedActiveResourceGroup"/>
 			<xs:group ref="OptionalResourceTimestampGroup"/>
 		</xs:sequence>
@@ -1252,11 +1247,11 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="immigration_date" type="SimpleDateType" minOccurs="0"/>
-                        <xs:element name="immigration_status" type="ImmigrationStatusNameType" minOccurs="0">
-                                <xs:annotation>
-                                        <xs:documentation>Individual's immigration status</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
+			<xs:element name="immigration_status" type="ImmigrationStatusNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Individual's immigration status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="tribal_info" type="TribalInfoType" minOccurs="0"/>
 			<xs:element name="is_state_resident" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
@@ -1449,6 +1444,7 @@
 							<xs:documentation>Individual is applying for health coverage</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
@@ -1654,7 +1650,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#tuition_and_fees"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#ira_deduction"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#student_loan_interest_deduction"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#retro_deduction"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:individual_deduction#retro_deduction"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IndividualEventNameType">
@@ -1707,7 +1703,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:income#title_monthly"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#title_yearly"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:income#strike_benefits"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:income#retro_income"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income#retro_income"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="IndividualRequestNameType">
@@ -2112,7 +2108,7 @@
 	</xs:complexType>
 	<xs:complexType name="FamilyMembersListType">
 		<xs:sequence>
-			<xs:element name="family_member" type="ApplicantType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="family_member" type="ApplicantType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="renewal_consent_through_year">
@@ -2335,40 +2331,37 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_income_wage_type#w2"/>
 		</xs:restriction>
 	</xs:simpleType>
-
 	<xs:complexType name="AssistedIndividualTotalIncomesByYearType">
 		<xs:annotation>
-	            <xs:documentation>Sum of all qualified, adjusted individual income sources, by calendar year. Also includes information about verification of the income.</xs:documentation>
+			<xs:documentation>Sum of all qualified, adjusted individual income sources, by calendar year. Also includes information about verification of the income.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-		<xs:element name="total_income_by_year" type="VerifiedCurrencyAmountPerAnnumType" maxOccurs="unbounded"/>
+			<xs:element name="total_income_by_year" type="VerifiedCurrencyAmountPerAnnumType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-
-       <xs:simpleType name="ImmigrationStatusNameType">
-                <xs:annotation>
-                        <xs:documentation>Enumerated list of immigration status modes</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:anyURI">
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#asylee"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#refugee"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#cuban_haitian"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#amerasian_non_citizen_under_584_of_foaa"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#deportation_withheld_under_243h_or_241b_of_ina"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#special_iraqi_afghani_immigrant"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#victim_of_severe_trafficking"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#member_of_federally_recognized_indian_tribe_or_american_indian_born_in_canada"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#parolled"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#conditional_entry_granted_before_1980"/>
-                        <xs:enumeration value="urn:openhbx:terms:v1:immigration_status#battered_non_citizen_spouse_child_etc"/>
-                </xs:restriction>
-        </xs:simpleType>
-
-        <xs:complexType name="TribalInfoType">
-                <xs:sequence>
-                        <xs:element name="tribal_id" type="xs:string" minOccurs="0"/>
-                        <xs:element name="tribal_name" type="xs:string" minOccurs="0"/>
-                        <xs:element name="tribal_state" type="xs:string" minOccurs="0"/>
-                </xs:sequence>
-        </xs:complexType>
+	<xs:simpleType name="ImmigrationStatusNameType">
+		<xs:annotation>
+			<xs:documentation>Enumerated list of immigration status modes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#asylee"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#refugee"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#cuban_haitian"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#amerasian_non_citizen_under_584_of_foaa"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#deportation_withheld_under_243h_or_241b_of_ina"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#special_iraqi_afghani_immigrant"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#victim_of_severe_trafficking"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#member_of_federally_recognized_indian_tribe_or_american_indian_born_in_canada"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#parolled"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#conditional_entry_granted_before_1980"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:immigration_status#battered_non_citizen_spouse_child_etc"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TribalInfoType">
+		<xs:sequence>
+			<xs:element name="tribal_id" type="xs:string" minOccurs="0"/>
+			<xs:element name="tribal_name" type="xs:string" minOccurs="0"/>
+			<xs:element name="tribal_state" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>
