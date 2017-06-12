@@ -1449,10 +1449,10 @@
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="is_without_assistance" type="xs:boolean"/>
-					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean"/>
-					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean"/>
-					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean"/>
-					<xs:element name="is_totally_ineligible" type="xs:boolean"/>
+					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
