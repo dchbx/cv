@@ -444,18 +444,76 @@
 		</xs:annotation>
 	</xs:element>
 
-        <xs:complexType name="ExternalLawfulPresenceResultType">
-           <xs:sequence>
-              <xs:element name="is_lawfully_present" type="xs:boolean"/>
-              <xs:element name="citizen_status" type="UsCitizenStatusNameType"/>
-           </xs:sequence>
-        </xs:complexType>
+  <xs:complexType name="ExternalLawfulPresenceResultType">
+     <xs:sequence>
+        <xs:element name="is_lawfully_present" type="xs:boolean"/>
+        <xs:element name="citizen_status" type="UsCitizenStatusNameType"/>
+     </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="IncomeVerificationCodeType">
+			<xs:restriction base="xs:anyURI">
+				<xs:enumeration value="urn:openhbx:terms:v1:income_verification#pending"/>
+				<xs:enumeration value="urn:openhbx:terms:v1:income_verification#outstanding"/>
+				<xs:enumeration value="urn:openhbx:terms:v1:income_verification#verified"/>
+				<xs:enumeration value="urn:openhbx:terms:v1:income_verification#cleared"/>
+			</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="IncomeVerificationResultType">
+		<xs:annotation>
+			<xs:documentation>Root element for Eligibility Determination Income Verification response.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="individual" type="verificationIndividualType"/>
+			<xs:element name="response_code" type="xs:string"/>
+			<xs:element name="response_text" type="IncomeVerificationCodeType" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="income_verification_failed" fixed="true"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="income_verified" fixed="true"/>
+				</xs:sequence>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="MECVerificationCodeType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#pending"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#outstanding"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#verified"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#cleared"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="MECVerificationResultType">
+		<xs:annotation>
+			<xs:documentation>Root element for Eligibility Determination MEC Verification response.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="individual" type="verificationIndividualType"/>
+			<xs:element name="response_code" type="xs:string"/>
+			<xs:element name="response_text" type="MECVerificationCodeType" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="mec_verification_failed" fixed="true"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="mec_verified" fixed="true"/>
+				</xs:sequence>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
 
 	<xs:complexType name="VerificationSet">
 		<xs:sequence>
-                   <xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
-                   <xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType"/>
-                   <xs:element name="residency_verification_results" type="residencyVerificationResultCodeType"/>
+			<xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType"/>
+			<xs:element name="residency_verification_results" type="residencyVerificationResultCodeType"/>
+			<xs:element name="income_verification_result" type="IncomeVerificationResultType" minOccurs="0"/>
+			<xs:element name="mec_verification_result" type="MECVerificationResultType" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
 
