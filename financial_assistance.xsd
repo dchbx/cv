@@ -18,6 +18,7 @@
 			<xs:element name="is_temp_out_of_state"/>
 			<xs:element name="is_required_to_file_taxes" type="xs:boolean"/>
 			<xs:element name="tax_filer_type" type="TaxFilerNameType"/>
+			<xs:element name="is_joint_tax_filing" type="xs:boolean"/>
 			<xs:element name="is_claimed_as_tax_dependent" type="xs:boolean"/>
 			<xs:element name="has_insurance" type="xs:boolean"/>
 			<xs:element name="had_prior_insurance" type="xs:boolean"/>
@@ -107,7 +108,6 @@
 			<xs:element name="applicant_type" type="FinancialAssistanceApplicationApplicantNameType"/>
 			<xs:element name="request_type" type="FinancialAssistanceApplicationRequestNameType"/>
 			<xs:element name="motivation_type" type="FinancialAssistanceApplicationMotivationNameType"/>
-			<xs:element name="is_joint_tax_filing" type="xs:boolean"/>
 			<xs:element name="status" type="FinancialAssistanceApplicationStatusNameType"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 			<xs:element name="effective_date" type="xs:dateTime"/>
