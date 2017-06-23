@@ -510,10 +510,10 @@
 	<xs:complexType name="VerificationSet">
 		<xs:sequence>
 			<xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType"/>
-			<xs:element name="residency_verification_results" type="residencyVerificationResultCodeType"/>
-			<xs:element name="income_verification_result" type="IncomeVerificationResultType" minOccurs="0"/>
-			<xs:element name="mec_verification_result" type="MECVerificationResultType" minOccurs="0"/>
+			<xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType" minOccurs="0"/>
+			<xs:element name="residency_verification_results" type="residencyVerificationResultCodeType" minOccurs="0"/>
+			<xs:element name="income_verification_result" type="IncomeVerificationResultType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="mec_verification_result" type="MECVerificationResultType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 
@@ -551,6 +551,16 @@
 					</xs:element>
 					<xs:element name="employee_roles" type="EmployeeRolesListType" minOccurs="0"/>
 					<xs:element name="broker_roles" type="BrokerRolesListType" minOccurs="0"/>
+					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="aptc_csr_annual_household_income" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="aptc_annual_income_limit" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="csr_annual_income_limit" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 					<xs:element name="brokers" type="BrokerAccountListType" minOccurs="0"/>
 					<xs:element ref="hbx_enrollment_exemptions" minOccurs="0"/>
@@ -583,6 +593,6 @@
 			<xs:group ref="FamilySharedElementsGroup"/>
 		</xs:sequence>
 	</xs:complexType>
-
-        <xs:element name="external_verified_family" type="VerifiedFamilyType"/>
+	<xs:element name="external_verifications" type="VerificationSet"/>
+    <xs:element name="external_verified_family" type="VerifiedFamilyType"/>
 </xs:schema>

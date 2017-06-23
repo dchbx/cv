@@ -555,10 +555,6 @@
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType"/>
-			<xs:element name="magi_medicaid_monthly_allowable_limit_income" type="CurrencyType"/>
-			<xs:element name="csr_household_income" type="CurrencyType"/>
-			<xs:element name="csr_allowable_limit_income" type="CurrencyType"/>
 			<xs:element name="benchmark_plan_id" type="IdentifierSimpleType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Silver plan used to calculate assistance values</xs:documentation>
@@ -625,6 +621,7 @@
 					<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
 					<xs:element name="employer_id" type="xs:integer"/>
 					<xs:element name="employer_address" type="AddressType"/>
+					<xs:element name="employer_phone" type="PhoneType"/>
 					<xs:element name="is_projected" type="xs:boolean"/>
 					<xs:element name="submitted_at" type="xs:dateTime"/>
 				</xs:sequence>
@@ -652,6 +649,11 @@
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="aptc_csr_annual_household_income" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="aptc_annual_income_limit" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="csr_annual_income_limit" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
@@ -663,12 +665,33 @@
 				<xs:sequence>
 					<xs:element name="benefit_id" type="xs:integer"/>
 					<xs:element name="title" type="xs:string" minOccurs="0"/>
-					<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
-					<xs:element name="is_employer_sponsored"/>
+					<xs:element name="is_enrolled" type="xs:boolean"/>
+					<xs:element name="enrolled_start_on" type="SimpleDateType" minOccurs="0"/>
+					<xs:element name="enrolled_end_on" type="SimpleDateType" minOccurs="0"/>
 					<xs:element name="is_eligible" type="xs:boolean"/>
-					<xs:element name="is_enrolled" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="eligible_start_on" type="SimpleDateType" minOccurs="0"/>
+					<xs:element name="eligible_end_on" type="SimpleDateType" minOccurs="0"/>
+					<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
+					<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
+					<xs:element name="employer_id" type="xs:integer" minOccurs="0"/>
+					<xs:element name="employer_address" type="AddressType" minOccurs="0"/>
+					<xs:element name="employer_phone" type="PhoneType" minOccurs="0"/>
 					<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="employee_cost_frequency" minOccurs="0"/>
+					<xs:element name="submitted_at" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FinancialAssistanceApplicantDeductionType">
+		<xs:complexContent>
+			<xs:restriction base="FinancialAssistanceDeductionType">
+				<xs:sequence>
+					<xs:element name="deduction_id" type="xs:integer"/>
+					<xs:element name="title" type="xs:string" minOccurs="0"/>
+					<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
+					<xs:element name="amount" type="xs:integer"/>
+					<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 					<xs:element name="start_on" type="SimpleDateType"/>
 					<xs:element name="end_on" type="SimpleDateType"/>
 					<xs:element name="submitted_at" type="xs:dateTime"/>
@@ -678,7 +701,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceIncomeType">
 		<xs:sequence>
-			<xs:element name="income_id" type="xs:integer" minOccurs="0"/>
+			<xs:element name="income_id" type="xs:integer"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 			<xs:element name="has_property_usage_rights" type="xs:boolean"/>
@@ -691,13 +714,14 @@
 			<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
 			<xs:element name="employer_id" type="xs:integer"/>
 			<xs:element name="employer_address" type="AddressType"/>
+			<xs:element name="employer_phone" type="PhoneType"/>
 			<xs:element name="is_projected" type="xs:boolean"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceDeductionType">
 		<xs:sequence>
-			<xs:element name="deduction_id" type="xs:integer" minOccurs="0"/>
+			<xs:element name="deduction_id" type="xs:integer"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 			<xs:element name="amount" type="xs:integer"/>
@@ -709,16 +733,21 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceBenefitType">
 		<xs:sequence>
-			<xs:element name="benefit_id" type="xs:integer" minOccurs="0"/>
+			<xs:element name="benefit_id" type="xs:integer"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
-			<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
-			<xs:element name="is_employer_sponsored"/>
+			<xs:element name="is_enrolled" type="xs:boolean"/>
+			<xs:element name="enrolled_start_on" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="enrolled_end_on" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="is_eligible" type="xs:boolean"/>
-			<xs:element name="is_enrolled" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="eligible_start_on" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="eligible_end_on" type="SimpleDateType" minOccurs="0"/>
+			<xs:element name="benefit_type" type="FinancialAssistanceBenefitNameType"/>
+			<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
+			<xs:element name="employer_id" type="xs:integer" minOccurs="0"/>
+			<xs:element name="employer_address" type="AddressType" minOccurs="0"/>
+			<xs:element name="employer_phone" type="PhoneType" minOccurs="0"/>
 			<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
 			<xs:element name="employee_cost_frequency" minOccurs="0"/>
-			<xs:element name="start_on" type="SimpleDateType"/>
-			<xs:element name="end_on" type="SimpleDateType"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1161,6 +1190,11 @@
 			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
+			<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
+			<xs:element name="aptc_csr_annual_household_income" type="CurrencyType" minOccurs="0"/>
+			<xs:element name="aptc_annual_income_limit" type="CurrencyType" minOccurs="0"/>
+			<xs:element name="csr_annual_income_limit" type="CurrencyType" minOccurs="0"/>
 			<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 			<xs:element name="brokers" type="BrokerAccountListType" minOccurs="0"/>
 			<xs:element ref="responsible_parties" minOccurs="0"/>
@@ -1453,6 +1487,11 @@
 					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="aptc_csr_annual_household_income" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="aptc_annual_income_limit" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="csr_annual_income_limit" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:restriction>
