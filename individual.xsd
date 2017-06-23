@@ -676,6 +676,9 @@
 					<xs:element name="employer_id" type="xs:integer" minOccurs="0"/>
 					<xs:element name="employer_address" type="AddressType" minOccurs="0"/>
 					<xs:element name="employer_phone" type="PhoneType" minOccurs="0"/>
+					<xs:element name="is_esi_waiting_period" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_esi_mec_met" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="esi_covered" type="FinancialAssistanceBenefitEsiCoveredType"/>
 					<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="employee_cost_frequency" minOccurs="0"/>
 					<xs:element name="submitted_at" type="xs:dateTime"/>
@@ -746,6 +749,9 @@
 			<xs:element name="employer_id" type="xs:integer" minOccurs="0"/>
 			<xs:element name="employer_address" type="AddressType" minOccurs="0"/>
 			<xs:element name="employer_phone" type="PhoneType" minOccurs="0"/>
+			<xs:element name="is_esi_waiting_period" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_esi_mec_met" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="esi_covered" type="FinancialAssistanceBenefitEsiCoveredType"/>
 			<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
 			<xs:element name="employee_cost_frequency" minOccurs="0"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
@@ -2366,6 +2372,13 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#coverage_under_the_state_health_benefits_risk_pool"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#veterans_administration_health_benefits"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#peace_corps_health_benefits"/>
+		</xs:restriction>
+	</xs:simpleType>
+		<xs:simpleType name="FinancialAssistanceBenefitEsiCoveredType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit_esi_coveredt#self"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit_esi_covered#self_and_spouse"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit_esi_covered#family"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="WageTypeKinds">
