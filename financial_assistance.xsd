@@ -71,7 +71,7 @@
 								<xs:complexContent>
 									<xs:restriction base="FinancialAssistanceDeductionType">
 										<xs:sequence>
-											<xs:element name="deduction_id" type="xs:integer"/>
+											<xs:element name="deduction_id" type="xs:string"/>
 											<xs:element name="title" type="xs:string" minOccurs="0"/>
 											<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 											<xs:element name="amount" type="xs:integer"/>

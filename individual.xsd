@@ -608,7 +608,7 @@
 		<xs:complexContent>
 			<xs:restriction base="FinancialAssistanceIncomeType">
 				<xs:sequence>
-					<xs:element name="income_id" type="xs:integer"/>
+					<xs:element name="income_id" type="xs:string"/>
 					<xs:element name="title" type="xs:string" minOccurs="0"/>
 					<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 					<xs:element name="has_property_usage_rights" type="xs:boolean"/>
@@ -663,7 +663,7 @@
 		<xs:complexContent>
 			<xs:restriction base="FinancialAssistanceBenefitType">
 				<xs:sequence>
-					<xs:element name="benefit_id" type="xs:integer"/>
+					<xs:element name="benefit_id" type="xs:string"/>
 					<xs:element name="title" type="xs:string" minOccurs="0"/>
 					<xs:element name="is_enrolled" type="xs:boolean"/>
 					<xs:element name="enrolled_start_on" type="SimpleDateType" minOccurs="0"/>
@@ -690,7 +690,7 @@
 		<xs:complexContent>
 			<xs:restriction base="FinancialAssistanceDeductionType">
 				<xs:sequence>
-					<xs:element name="deduction_id" type="xs:integer"/>
+					<xs:element name="deduction_id" type="xs:string"/>
 					<xs:element name="title" type="xs:string" minOccurs="0"/>
 					<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 					<xs:element name="amount" type="xs:integer"/>
@@ -704,7 +704,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceIncomeType">
 		<xs:sequence>
-			<xs:element name="income_id" type="xs:integer"/>
+			<xs:element name="income_id" type="xs:string"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 			<xs:element name="has_property_usage_rights" type="xs:boolean"/>
@@ -724,7 +724,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceDeductionType">
 		<xs:sequence>
-			<xs:element name="deduction_id" type="xs:integer"/>
+			<xs:element name="deduction_id" type="xs:string"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
 			<xs:element name="amount" type="xs:integer"/>
@@ -736,7 +736,7 @@
 	</xs:complexType>
 	<xs:complexType name="FinancialAssistanceBenefitType">
 		<xs:sequence>
-			<xs:element name="benefit_id" type="xs:integer"/>
+			<xs:element name="benefit_id" type="xs:string"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="is_enrolled" type="xs:boolean"/>
 			<xs:element name="enrolled_start_on" type="SimpleDateType" minOccurs="0"/>
