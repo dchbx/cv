@@ -568,7 +568,7 @@
 					<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="magi_as_percentage_of_fpl" type="xs:float" minOccurs="0"/>
- 					<xs:element name="magi_medicaid_category" minOccurs="0"/>
+ 					<xs:element name="magi_medicaid_category" type="MagiMedicaidCategoryType" minOccurs="0"/>
 					<xs:element name="medicaid_household_size" type="xs:integer" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 					<xs:element name="brokers" type="BrokerAccountListType" minOccurs="0"/>

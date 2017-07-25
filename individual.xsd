@@ -636,7 +636,7 @@
 					<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="magi_as_percentage_of_fpl" type="xs:float" minOccurs="0"/>
-					<xs:element name="magi_medicaid_category" minOccurs="0"/>
+					<xs:element name="magi_medicaid_category" type="MagiMedicaidCategoryType" minOccurs="0"/>
 					<xs:element name="medicaid_household_size" type="xs:integer" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
@@ -652,8 +652,8 @@
 					<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 					<xs:element name="has_property_usage_rights" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="wage_type" type="WageTypeKinds" minOccurs="0"/>
-					<xs:element name="hours_per_week" type="xs:integer"/>
-					<xs:element name="amount" type="xs:integer"/>
+					<xs:element name="hours_per_week" type="xs:integer" minOccurs="0"/>
+					<xs:element name="amount" type="CurrencyType"/>
 					<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 					<xs:element name="start_on" type="SimpleDateType"/>
 					<xs:element name="end_on" type="SimpleDateType" minOccurs="0"/>
@@ -674,7 +674,7 @@
 					<xs:element name="deduction_id" type="xs:string"/>
 					<xs:element name="title" type="xs:string" minOccurs="0"/>
 					<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
-					<xs:element name="amount" type="xs:integer"/>
+					<xs:element name="amount" type="CurrencyType"/>
 					<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 					<xs:element name="start_on" type="SimpleDateType"/>
 					<xs:element name="end_on" type="SimpleDateType"/>
@@ -701,7 +701,7 @@
 					<xs:element name="is_esi_mec_met" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="esi_covered" type="FinancialAssistanceBenefitEsiCoveredType" minOccurs="0"/>
 					<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
-					<xs:element name="employee_cost_frequency" minOccurs="0"/>
+					<xs:element name="employee_cost_frequency" type="FinancialAssistanceFrequencyNameType" minOccurs="0"/>
 					<xs:element name="submitted_at" type="xs:dateTime"/>
 				</xs:sequence>
 			</xs:restriction>
@@ -714,15 +714,15 @@
 			<xs:element name="income_type" type="FinancialAssistanceIncomeNameType"/>
 			<xs:element name="has_property_usage_rights" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="wage_type" type="WageTypeKinds" minOccurs="0"/>
-			<xs:element name="hours_per_week" type="xs:integer"/>
-			<xs:element name="amount" type="xs:integer"/>
+			<xs:element name="hours_per_week" type="xs:integer" minOccurs="0"/>
+			<xs:element name="amount" type="CurrencyType"/>
 			<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 			<xs:element name="start_on" type="SimpleDateType"/>
 			<xs:element name="end_on" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="employer_name" type="xs:string" minOccurs="0"/>
-			<xs:element name="employer_id" type="xs:integer"/>
-			<xs:element name="employer_address" type="AddressType"/>
-			<xs:element name="employer_phone" type="PhoneType"/>
+			<xs:element name="employer_id" type="xs:integer" minOccurs="0"/>
+			<xs:element name="employer_address" type="AddressType" minOccurs="0"/>
+			<xs:element name="employer_phone" type="PhoneType" minOccurs="0"/>
 			<xs:element name="is_projected" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
@@ -732,7 +732,7 @@
 			<xs:element name="deduction_id" type="xs:string"/>
 			<xs:element name="title" type="xs:string" minOccurs="0"/>
 			<xs:element name="deduction_type" type="FinancialAssistanceDeductionNameType"/>
-			<xs:element name="amount" type="xs:integer"/>
+			<xs:element name="amount" type="CurrencyType"/>
 			<xs:element name="frequency" type="FinancialAssistanceFrequencyNameType"/>
 			<xs:element name="start_on" type="SimpleDateType"/>
 			<xs:element name="end_on" type="SimpleDateType"/>
@@ -755,7 +755,7 @@
 			<xs:element name="is_esi_mec_met" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="esi_covered" type="FinancialAssistanceBenefitEsiCoveredType" minOccurs="0"/>
 			<xs:element name="employee_cost" type="CurrencyType" minOccurs="0"/>
-			<xs:element name="employee_cost_frequency" minOccurs="0"/>
+			<xs:element name="employee_cost_frequency" type="FinancialAssistanceFrequencyNameType" minOccurs="0"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
 		</xs:sequence>
 	</xs:complexType>
@@ -1201,7 +1201,7 @@
 			<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
 			<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
 			<xs:element name="magi_as_percentage_of_fpl" type="xs:float" minOccurs="0"/>
-			<xs:element name="magi_medicaid_category" minOccurs="0"/>
+			<xs:element name="magi_medicaid_category" type="MagiMedicaidCategoryType" minOccurs="0"/>
 			<xs:element name="medicaid_household_size" type="xs:integer" minOccurs="0"/>
 			<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 			<xs:element name="brokers" type="BrokerAccountListType" minOccurs="0"/>
@@ -1498,7 +1498,7 @@
 					<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
 					<xs:element name="magi_as_percentage_of_fpl" type="xs:float" minOccurs="0"/>
-					<xs:element name="magi_medicaid_category" minOccurs="0"/>
+					<xs:element name="magi_medicaid_category" type="MagiMedicaidCategoryType" minOccurs="0"/>
 					<xs:element name="medicaid_household_size" type="xs:integer" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 				</xs:sequence>
@@ -2404,6 +2404,18 @@
 			<xs:element name="total_income_by_year" type="VerifiedCurrencyAmountPerAnnumType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="MagiMedicaidCategoryType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#none"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#adult_group"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#child"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#chip_targeted_low_income_child"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#optional_targeted_low_income_child"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#parent_caretaker"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#pregnancy"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:magi_medicaid_category#unborn_child"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="RaceNameType">
 		<xs:annotation>
 			<xs:documentation>Enumerated list of race types for applicant optional selections</xs:documentation>
