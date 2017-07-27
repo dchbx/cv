@@ -18,18 +18,18 @@
 			<xs:element name="is_temp_out_of_state" minOccurs="0"/>
 			<xs:element name="is_required_to_file_taxes" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="tax_filer_type" type="TaxFilerNameType"/>
-			<xs:element name="is_joint_tax_filing" type="xs:boolean"/>
+			<xs:element name="is_joint_tax_filing" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_claimed_as_tax_dependent" type="xs:boolean"/>
 			<xs:element name="has_insurance" type="xs:boolean"/>
 			<xs:element name="had_prior_insurance" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="has_state_health_benefit" type="xs:boolean"/>
-			<xs:element name="is_medicare_eligible"/>
+			<xs:element name="has_state_health_benefit" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="is_medicare_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_student" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="student_type" type="FinancialAssistanceApplicationStudentNameType" minOccurs="0"/>
 			<xs:element name="school_type" type="FinancialAssistanceApplicationSchoolNameType" minOccurs="0"/>
 			<xs:element name="student_status_end_on" type="SimpleDateType" minOccurs="0"/>
 			<xs:element name="is_ia_eligible" type="xs:boolean" minOccurs="0"/>
-			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean"/>
+			<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_magi_medicaid" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="is_self_attested_blind" type="xs:boolean"/>
 			<xs:element name="is_self_attested_disabled" type="xs:boolean"/>
@@ -90,7 +90,7 @@
 			<xs:element name="haven_ic_id" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="e_case_id" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="applicant_type" type="FinancialAssistanceApplicationApplicantNameType"/>
-			<xs:element name="request_type" type="FinancialAssistanceApplicationRequestNameType"/>
+			<xs:element name="request_type" type="xs:string"/>
 			<xs:element name="motivation_type" type="FinancialAssistanceApplicationMotivationNameType"/>
 			<xs:element name="status" type="FinancialAssistanceApplicationStatusNameType"/>
 			<xs:element name="submitted_at" type="xs:dateTime"/>
@@ -120,7 +120,7 @@
 			</xs:element>
 			<xs:element name="has_accepted_medicaid_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_medicaid_insurance_collection_terms" type="xs:boolean"/>
-			<xs:element name="has_accepted_attestation_terms" type="xs:boolean"/>
+			<xs:element name="has_accepted_attestation_terms" type="xs:boolean" minOccurs="0"/>
 			<xs:element name="has_accepted_submission_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_parent_living_out_of_home_terms" type="xs:boolean"/>
 			<xs:element name="has_accepted_report_change_terms" type="xs:boolean"/>
@@ -227,7 +227,7 @@
 	</xs:complexType>
 	<xs:complexType name="AssistanceTaxHouseholdMemberListType">
 		<xs:sequence>
-			<xs:element name="assistance_tax_household_member" type="FinancialAssistanceApplicantType"/>
+			<xs:element name="assistance_tax_household_member" type="FinancialAssistanceApplicantType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="AssistedTaxHouseholdIncomesByYearType">
