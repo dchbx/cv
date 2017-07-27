@@ -2352,8 +2352,8 @@
 	</xs:simpleType>
 	<xs:simpleType name="FinancialAssistanceBenefitNameType">
         <xs:restriction base="xs:anyURI">
-            <xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#enrolled"/>
-            <xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#eligible"/>
+            <xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#is_enrolled"/>
+            <xs:enumeration value="urn:openhbx:terms:v1:financial_assistance_benefit#is_eligible"/>
         </xs:restriction>
   </xs:simpleType>
 	<xs:simpleType name="FinancialAssistanceBenefitInsuranceNameType">
