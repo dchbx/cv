@@ -480,7 +480,11 @@
 									<xs:sequence>
 										<xs:element name="employer_link" type="EmployerLinkType"/>
 										<xs:element name="total_employer_responsible_amount" type="CurrencyType"/>
-						                                <xs:element name="composite_rating_tier_name" type="CompositeRatingTierNameType" minOccurs="0"/>
+										<xs:element name="composite_rating_tier_name" type="CompositeRatingTierNameType" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>This element indicates the existance of a composite rated policy/enrollment.  If this element is present, individual level premiums should be ignored.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
@@ -492,6 +496,7 @@
 										<xs:element name="elected_aptc_percent" type="xs:float" minOccurs="0"/>
 										<xs:element ref="applied_aptc_amount"/>
 										<xs:element name="other_payment_amount" type="CurrencyType" minOccurs="0"/>
+										<xs:element name="assistance_effective_date" type="SimpleDateType" minOccurs="0"/>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
