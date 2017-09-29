@@ -117,6 +117,25 @@
 			<xs:group ref="ResourceTimestampGroup" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
+
+	<xs:complexType name="BrokerPaymentAccountType">
+		<xs:annotation>
+                	<xs:documentation>Describes account payment information for brokers.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="routing_number" type="xs:string"/>
+			<xs:element name="account_number" type="xs:string"/>
+			<xs:element name="account_active_on" type="xs:date"/>
+			<xs:element name="account_inactive_on" type="xs:date" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="BrokerPaymentAccountsType">
+		<xs:sequence>
+			<xs:element name="broker_payment_account" type="BrokerPaymentAccountType" minOccurs="1" maxOccurs="unbounded"/>
+	        </xs:sequence>
+	</xs:complexType>
+
 	<xs:complexType name="BrokerRoleType">
 		<xs:annotation>
 			<xs:documentation>An individual playing the role of a broker.</xs:documentation>
@@ -125,6 +144,7 @@
 			<xs:element name="id" type="IdentifierType"/>
 			<xs:element name="npn" type="NpnIdType"/>
 			<xs:element name="broker_agency" type="BrokerAgencyLinkType"/>
+			<xs:element name="broker_payment_accounts" type="BrokerPaymentAccountsType" minOccurs="0"/> 
 			<xs:group ref="ResourceTimestampGroup" minOccurs="0"/>
 		</xs:sequence>
 	</xs:complexType>
