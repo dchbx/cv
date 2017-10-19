@@ -8,6 +8,7 @@
 	<xs:element name="coverage_quote_request" type="coverageQuoteRequestType"/>
 	<xs:element name="enrollment" type="EnrollmentType"/>
 	<xs:element name="enrollment_event" type="EnrollmentEventType"/>
+	<xs:element name="policy_event" type="PolicyEventType"/>
 	<xs:element name="policy" type="PolicyType"/>
 	<xs:element name="policy_state" type="PolicyStateNameType"/>
 	<xs:element name="policy_uri" type="IdentifierSimpleType" substitutionGroup="resource_instance_uri">
@@ -193,7 +194,7 @@
 										<xs:documentation>Uniform Resource Name (URN) for this event, e.g.; urn:openhbx:events:v1:individual#added</xs:documentation>
 									</xs:annotation>
 								</xs:element>
-								<xs:element name="qualifying_reason" type="EligibilityNameType" minOccurs="0">
+								<xs:element name="qualifying_reason" type="BenefitMaintenanceNameType" minOccurs="0">
 									<xs:annotation>
 										<xs:documentation>URN for the regulatory or policy basis enabling this change </xs:documentation>
 									</xs:annotation>
@@ -236,75 +237,103 @@
 			<xs:element ref="policy" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+
+        <xs:complexType name="HbxEnrollmentIdsList">
+          <xs:sequence>
+            <xs:element name="hbx_enrollment_id" type="xs:anyURI" minOccurs="1" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+
+	<xs:complexType name="PolicyEventHeaderType">
+		<xs:annotation>
+			<xs:documentation>Headers for notification messages published about a Policy resource</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="ServiceHeaderType">
+				<xs:sequence>
+					<xs:element name="hbx_id" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>CMS-assigned Health Benefit Exchange identifier, e.g. DC0</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="submitted_timestamp" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>UTC date and time when event occured</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="authorization" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Authentication/authorization credentials</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="message_id" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Value that uniqely identifies message</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="originating_service" type="xs:anyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The urn of the requesting service</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="correlation_id" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Attribute to associate the current message with previous message ID or application-specifc ID</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+                                        <xs:element name="application_header_properties" minOccurs="0">
+                                                <xs:annotation>
+                                                        <xs:documentation>Application-specific header key/value pairs</xs:documentation>
+                                                </xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="event_effective_date" type="SimpleDateType" minOccurs="0"/>
+								<xs:element name="hbx_enrollment_ids" type="HbxEnrollmentIdsList" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+                                        </xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:complexType name="PolicyEventType">
 		<xs:annotation>
 			<xs:documentation>Notification messages published about a Policy resource</xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="header">
-				<xs:complexType>
-					<xs:complexContent>
-						<xs:restriction base="ServiceHeaderType">
-							<xs:sequence>
-								<xs:element name="hbx_id" type="xs:string">
-									<xs:annotation>
-										<xs:documentation>CMS-assigned Health Benefit Exchange identifier, e.g. DC0</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-								<xs:element name="submitted_timestamp" type="xs:dateTime">
-									<xs:annotation>
-										<xs:documentation>UTC date and time when event occured</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-								<xs:element name="authorization" type="xs:string">
-									<xs:annotation>
-										<xs:documentation>Authentication/authorization credentials</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-								<xs:element name="message_id" type="xs:string" minOccurs="0">
-									<xs:annotation>
-										<xs:documentation>Value that uniqely identifies message</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-								<xs:element name="originating_service" type="xs:anyURI">
-									<xs:annotation>
-										<xs:documentation>The urn of the requesting service</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-								<xs:element name="correlation_id" type="xs:string" minOccurs="0">
-									<xs:annotation>
-										<xs:documentation>Attribute to associate the current message with previous message ID or application-specifc ID</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-							</xs:sequence>
-						</xs:restriction>
-					</xs:complexContent>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="event">
-				<xs:complexType>
-					<xs:complexContent>
-						<xs:restriction base="ServiceEventType">
-							<xs:sequence>
-								<xs:element name="event_name" type="PolicyEventNameType"/>
-								<xs:element ref="policy_uri"/>
-								<xs:element name="body" minOccurs="0">
-									<xs:complexType>
-										<xs:complexContent>
-											<xs:restriction base="ServiceBodyType">
-												<xs:sequence>
-													<xs:element ref="policy"/>
-												</xs:sequence>
-											</xs:restriction>
-										</xs:complexContent>
-									</xs:complexType>
-								</xs:element>
-							</xs:sequence>
-						</xs:restriction>
-					</xs:complexContent>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:restriction base="ServiceEventType">
+				<xs:sequence>
+					<xs:element name="event_name" type="PolicyEventNameType"/>
+					<xs:element name="qualifying_reason" type="BenefitMaintenanceNameType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URN for the regulatory or policy basis enabling this change </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="resource_instance_uri" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URN(s) for the resource instance that is subject of this event</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element ref="extended_resource_instance_uri" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>URN(s) for other resource instances assocated with this event</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="header" type="PolicyEventHeaderType"/>
+					<xs:element name="body" minOccurs="0">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="ServiceBodyType">
+									<xs:sequence>
+										<xs:element ref="policy"/>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="PolicyRequestType">
 		<xs:annotation>
@@ -606,6 +635,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_reenroll"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#reinstate_enrollment"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#reinstate_member"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#cancel_enrollment"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#terminate_enrollment"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_add"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_terminate"/>
@@ -615,24 +645,6 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#cobra_reinstate"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_name_or_demographic"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_demographic_deprecated"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="EnrollmentNameType">
-		<xs:restriction base="xs:anyURI">
-			<xs:enumeration value="urn:openhbx:enrollment:v1:policies#initial_enrollment"/>
-			<xs:enumeration value="urn:openhbx:enrollment:v1:policies#special_enrollment"/>
-			<xs:enumeration value="urn:openhbx:enrollment:v1:policies#renewal"/>
-			<xs:enumeration value="urn:openhbx:enrollment:v1:policies#cobra"/>
-			<xs:enumeration value="urn:openhbx:enrollment:v1:policies#maintenance"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="EligibilityNameType">
-		<xs:restriction base="xs:anyURI">
-			<xs:enumeration value="urn:openhbx:terms:v1:eligibility#open_enrollment"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:eligibility#special_enrollment"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:eligibility#new_hire"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:eligibility#cobra"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:eligibility#non_enrollment_maintenance"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="EnrollmentStatusNameType">

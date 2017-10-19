@@ -1637,6 +1637,10 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:benefit_maintenance#surviving_spouse"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:benefit_maintenance#divorce"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:benefit_maintenance#retirement"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:benefit_maintenance#open_enrollment"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:benefit_maintenance#special_enrollment"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:benefit_maintenance#new_hire"/>
+                        <xs:enumeration value="urn:openhbx:terms:v1:benefit_maintenance#cobra"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="HbxEnrollmentExemptionNameType">
