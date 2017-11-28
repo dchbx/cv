@@ -851,6 +851,7 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:aca_marketplace#individual"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:aca_marketplace#shop"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:aca_marketplace#coverall"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:aca_marketplace#cobra"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CalendarYearType">
