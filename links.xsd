@@ -120,7 +120,9 @@
 					<xs:documentation>Federal Employer Identifier Number</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-		</xs:sequence>
+      <xs:element ref="contacts" minOccurs="0"/>
+      <xs:element name="office_locations" type="OfficeLocationListType" minOccurs="0"/>
+    </xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="EnrolleeBenefitType">
 		<xs:sequence>
