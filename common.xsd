@@ -463,10 +463,10 @@
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
-			<xs:element name="country_code" minOccurs="0"/>
-			<xs:element name="area_code" minOccurs="0"/>
+			<xs:element name="country_code" type="xs:string" minOccurs="0"/>
+			<xs:element name="area_code" type="xs:string" minOccurs="0"/>
 			<xs:element name="phone_number" type="TelephoneNumberType" minOccurs="0"/>
-			<xs:element name="full_phone_number"/>
+			<xs:element name="full_phone_number" type="xs:string"/>
 			<xs:element name="extension" type="xs:string" minOccurs="0"/>
 			<xs:element name="is_preferred" type="xs:boolean" default="false">
 				<xs:annotation>

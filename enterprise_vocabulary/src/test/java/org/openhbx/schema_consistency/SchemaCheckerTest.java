@@ -1,6 +1,7 @@
-package org.openhbx;
+package org.openhbx.schema_consistency;
 
-import org.openhbx.xml.ErrorHandler;
+import org.openhbx.schema_consistency.SchemaChecker;
+import org.openhbx.schema_consistency.test_utilities.xml.ErrorHandler;
 import junit.framework.Assert;
 import org.junit.Test;
 

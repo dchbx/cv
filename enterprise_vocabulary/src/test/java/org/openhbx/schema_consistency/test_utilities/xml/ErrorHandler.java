@@ -1,4 +1,4 @@
-package org.openhbx.xml;
+package org.openhbx.schema_consistency.test_utilities.xml;
 
 import java.util.ArrayList;
 import java.util.List;

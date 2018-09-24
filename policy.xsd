@@ -490,6 +490,11 @@
 					<xs:documentation>HBX-assigned and Carrier-assigned Policy IDs when known</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="previous_policy_id" type="IdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates previous ID for purpose of Continunity of Coverage.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="broker" type="BrokerLinkType" minOccurs="0"/>
 			<xs:element name="enrollees">
 				<xs:complexType>
@@ -509,6 +514,7 @@
 									<xs:sequence>
 										<xs:element name="employer_link" type="EmployerLinkType"/>
 										<xs:element name="total_employer_responsible_amount" type="CurrencyType"/>
+										<xs:element name="cobra_eligibility_date" type="SimpleDateType" minOccurs="0"/>
 										<xs:element name="composite_rating_tier_name" type="CompositeRatingTierNameType" minOccurs="0">
 											<xs:annotation>
 												<xs:documentation>This element indicates the existance of a composite rated policy/enrollment.  If this element is present, individual level premiums should be ignored.</xs:documentation>
@@ -640,11 +646,15 @@
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_add"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_terminate"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_name_deprecated"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#cobra_initial"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#cobra_renew"/>
-			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#cobra_reinstate"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_name_or_demographic"/>
 			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_member_demographic_deprecated"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:enrollment#change_relationship">
+				<xs:annotation>
+					<xs:documentation>
+						Change of relationship between the covered members.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="EnrollmentStatusNameType">

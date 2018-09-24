@@ -1,11 +1,11 @@
-package org.openhbx;
+package org.openhbx.schema_consistency;
 
-import org.openhbx.xml.ErrorHandler;
+import org.openhbx.schema_consistency.test_utilities.xml.ErrorHandler;
 import java.io.InputStream;
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.SchemaFactory;
-import org.openhbx.xml.Resolver;
+import org.openhbx.schema_consistency.test_utilities.xml.Resolver;
 
 /**
  *
@@ -14,7 +14,7 @@ import org.openhbx.xml.Resolver;
 public class SchemaChecker {
 
   public ErrorHandler validateSchema(String schema) throws Exception {
-    String lookupLocation = "org/openhbx/" + schema;
+    String lookupLocation = "org/openhbx/enterprise_vocabulary/xsds/" + schema;
     InputStream fileStream = this.getClass().
             getClassLoader().
             getResourceAsStream(lookupLocation);

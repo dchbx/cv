@@ -1882,6 +1882,11 @@
 					<xs:documentation>Placeholder for individual or employer open enrollment period</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#cobra">
+				<xs:annotation>
+					<xs:documentation>Became eligible for cobra coverage.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 			<xs:enumeration value="urn:dc0:terms:v1:qualifying_life_event#lost_access_to_mec">
 				<xs:annotation>
 					<xs:documentation>Loss of other health coverage</xs:documentation>

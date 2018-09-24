@@ -1,4 +1,4 @@
-package org.openhbx.xml;
+package org.openhbx.schema_consistency.test_utilities.xml;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -13,7 +13,7 @@ public class Resolver implements LSResourceResolver {
 
     @Override
     public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
-      String lookupLocation = "org/openhbx/" + systemId;
+      String lookupLocation = "org/openhbx/enterprise_vocabulary/xsds/" + systemId;
       InputStream fileStream = this.getClass().
             getClassLoader().
             getResourceAsStream(lookupLocation);

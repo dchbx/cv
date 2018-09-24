@@ -777,6 +777,11 @@
 					<xs:documentation>Via either the exchange or an appeal by an employer, plan year offerings and contribution models have been corrected.</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="urn:openhbx:events:v1:employer#benefit_coverage_mid_plan_year_initial_eligible">
+				<xs:annotation>
+					<xs:documentation>Signal that the employer is a mid-year conversion employer</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 
