@@ -284,6 +284,7 @@
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
+
 	<xs:simpleType name="RelationshipBenefitRelationshipType">
 		<xs:restriction base="xs:anyURI">
 			<xs:enumeration value="urn:openhbx:terms:v1:employee_census_relationship#employee"/>
@@ -303,6 +304,34 @@
 			<xs:fractionDigits value="2"/>
 		</xs:restriction>
 	</xs:simpleType>
+
+	<xs:simpleType name="FehbContributionCategoryNameType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:congressional_contribution_category#self"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:congressional_contribution_category#self_plus_one"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:congressional_contribution_category#self_and_family"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+  <xs:complexType name="FehbContributionCategoryType">
+		<xs:sequence>
+			<xs:element name="category_name" type="FehbContributionCategoryNameType"/>
+			<xs:element name="contribution_percent" type="ContributionPercentType"/>
+			<xs:element name="contribution_maximum" type="CurrencyType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FehbContributionBenefitsType">
+		<xs:sequence>
+      <xs:element name="fehb_contribution_category" type="FehbContributionCategoryType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FederalContributionBenefitsType">
+		<xs:choice>
+			<xs:element name="fehb_benefits" type="FehbContributionBenefitsType"/>
+		</xs:choice>
+	</xs:complexType>
 
 	<xs:complexType name="RelationshipBenefitType">
 		<xs:sequence>
@@ -336,7 +365,7 @@
 				</xs:complexType>
 			</xs:element>
 			<xs:choice>
-				<xs:element name="federal_contributions" type="xs:anyType"/>
+				<xs:element name="federal_contributions" type="FederalContributionBenefitsType"/>
 				<xs:element name="relationship_benefits" type="RelationshipBenefitsListType"/>
 				<xs:element name="composite_rating_tiers" type="CompositeRatingTierListType"/>
 			</xs:choice>
