@@ -482,21 +482,96 @@
 		</xs:annotation>
 	</xs:element>
 
-        <xs:complexType name="ExternalLawfulPresenceResultType">
-           <xs:sequence>
-              <xs:element name="is_lawfully_present" type="xs:boolean"/>
-              <xs:element name="citizen_status" type="UsCitizenStatusNameType"/>
-           </xs:sequence>
-        </xs:complexType>
+  <xs:complexType name="ExternalLawfulPresenceResultType">
+     <xs:sequence>
+        <xs:element name="is_lawfully_present" type="xs:boolean"/>
+        <xs:element name="citizen_status" type="UsCitizenStatusNameType"/>
+     </xs:sequence>
+  </xs:complexType>
 
-	<xs:complexType name="VerificationSet">
+  <xs:simpleType name="IncomeVerificationCodeType">
+			<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#submitted"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#external_source"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#not_required"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#pending"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#unverified"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#outstanding"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:income_verification#verified"/>
+			</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="IncomeVerificationResultType">
+		<xs:annotation>
+			<xs:documentation>Root element for Eligibility Determination Income Verification response.</xs:documentation>
+		</xs:annotation>
 		<xs:sequence>
-                   <xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
-                   <xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType"/>
-                   <xs:element name="residency_verification_results" type="residencyVerificationResultCodeType"/>
+			<xs:element name="id" type="IdentifierType"/> 
+			<xs:element name="individual" type="verificationIndividualType"/>
+			<xs:element name="response_code" type="IncomeVerificationCodeType"/>
+			<xs:element name="response_text" type="xs:string" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="income_verification_failed" fixed="true"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="income_verified" fixed="true"/>
+				</xs:sequence>
+			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 
+	<xs:simpleType name="MECVerificationCodeType">
+		<xs:restriction base="xs:anyURI">
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#submitted"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#external_source"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#not_required"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#pending"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#unverified"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#outstanding"/>
+			<xs:enumeration value="urn:openhbx:terms:v1:mec_verification#verified"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="MECVerificationResultType">
+		<xs:annotation>
+			<xs:documentation>Root element for Eligibility Determination MEC Verification response.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="IdentifierType"/>
+			<xs:element name="individual" type="verificationIndividualType"/>
+			<xs:element name="response_code" type="MECVerificationCodeType"/>
+			<xs:element name="response_text" type="xs:string" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="mec_verification_failed" fixed="true"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="mec_verified" fixed="true"/>
+				</xs:sequence>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="VerificationSet">
+		<xs:sequence>
+			<xs:element name="interactive_verification_results" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="lawful_presence_verification_results" type="ExternalLawfulPresenceResultType" minOccurs="0"/>
+			<xs:element name="residency_verification_results" type="residencyVerificationResultCodeType" minOccurs="0"/>
+			<xs:element name="income_verification_result" type="IncomeVerificationResultType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="mec_verification_result" type="MECVerificationResultType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExternalVerificationsType">
+		<xs:annotation>
+			<xs:documentation>Describes a verifications set from external system.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="IdentifierType"/>
+			<xs:group ref="FamilySharedElementsGroup"/>
+			<xs:element name="verifications" type="VerificationSet"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="VerifiedFamilyMemberType">
 		<xs:annotation>
 			<xs:documentation>Family member with verification results.</xs:documentation>
@@ -521,7 +596,7 @@
 					</xs:element>
 					<xs:element name="person" type="PersonType"/>
 					<xs:element ref="person_relationships"/>
-					<xs:element name="person_demographics" type="PersonDemographicsType"/>
+					<xs:element name="person_demographics" type="PersonDemographicsType" minOccurs="0"/>
 					<xs:element name="is_primary_applicant" type="xs:boolean"/>
 					<xs:element name="is_consent_applicant" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="is_coverage_applicant" type="xs:boolean" minOccurs="0">
@@ -531,6 +606,16 @@
 					</xs:element>
 					<xs:element name="employee_roles" type="EmployeeRolesListType" minOccurs="0"/>
 					<xs:element name="broker_roles" type="BrokerRolesListType" minOccurs="0"/>
+					<xs:element name="is_without_assistance" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_insurance_assistance_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_medicaid_chip_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_non_magi_medicaid_eligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="is_totally_ineligible" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_household_income" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="magi_medicaid_monthly_income_limit" type="CurrencyType" minOccurs="0"/>
+					<xs:element name="magi_as_percentage_of_fpl" type="xs:float" minOccurs="0"/>
+ 					<xs:element name="magi_medicaid_category" type="MagiMedicaidCategoryType" minOccurs="0"/>
+					<xs:element name="medicaid_household_size" type="xs:integer" minOccurs="0"/>
 					<xs:element name="person_health" type="IndividualHealthType" minOccurs="0"/>
 					<xs:element name="brokers" type="BrokerAccountListType" minOccurs="0"/>
 					<xs:element ref="hbx_enrollment_exemptions" minOccurs="0"/>
@@ -563,6 +648,6 @@
 			<xs:group ref="FamilySharedElementsGroup"/>
 		</xs:sequence>
 	</xs:complexType>
-
-        <xs:element name="external_verified_family" type="VerifiedFamilyType"/>
+	<xs:element name="external_verifications" type="ExternalVerificationsType"/>
+    <xs:element name="external_verified_family" type="VerifiedFamilyType"/>
 </xs:schema>

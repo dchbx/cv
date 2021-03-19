@@ -63,6 +63,11 @@ public class SchemaCheckerTest {
   public void CheckVocabularyTest() throws Exception {
     checkSchema("vocabulary.xsd");
   }
+
+  @Test
+  public void CheckFinancialAssistanceTest() throws Exception {
+    checkSchema("financial_assistance.xsd");
+  }
 /*  
   @Test
   public void CheckPremiumPaymentTest() throws Exception {
